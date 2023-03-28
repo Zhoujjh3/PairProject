@@ -15,7 +15,7 @@ public class RunGame {
 	
 	public RunGame() {
 		samurai = new Player();
-		background = new ImageIcon("images\\\\background0.png").getImage();
+		background = new ImageIcon("images//background0.png").getImage();
 		
 		frame = new JFrame();
 		chamber = new Chamber(samurai, background);

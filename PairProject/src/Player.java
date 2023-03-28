@@ -13,7 +13,7 @@ public class Player {
 	
 	public Player() {
 		//player = new ImageIcon(getClass().getClassLoader().getResource("up arrow.png")).getImage();
-		player = new ImageIcon("images\\swordsman3.png").getImage();
+		player = new ImageIcon("images//swordsman3.png").getImage();
 		xPos = 500;
 		yPos = 500;
 	}
