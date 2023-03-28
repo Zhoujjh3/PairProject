@@ -22,6 +22,6 @@ public class Chamber extends JPanel{
 		
 		samurai.drawPlayer(g);
 		g2.setColor(Color.black);
-		g2.fillRect(0, 690, 1000, 250);
+		g2.fillRect(0, 694, this.getWidth(), this.getHeight()-694);
 	}
 }
