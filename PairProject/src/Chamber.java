@@ -1,19 +1,18 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-
-import javax.swing.JPanel;
+import java.awt.*;
+import java.util.*;
+import javax.swing.*;
 
 
 public class Chamber extends JPanel{
 	
 	Player samurai;
 	Image chamber;
+	ArrayList<Obstacle> theOPPS;
 	
-	public Chamber(Player player, Image background) {
+	public Chamber(Player player, Image background, ArrayList<Obstacle> obstacles) {
 		samurai = player;
 		chamber = background;
+		theOPPS = obstacles;
 	}
 	
 	public void paintComponent(Graphics g) {
