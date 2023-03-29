@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +19,8 @@ public class RunGame {
 		frame = new JFrame();
 		chamber = new Chamber(samurai, background, obstacles);
 		chamber.setPreferredSize(new Dimension(1000, 750));
-		chamber.addMouseListener(new Clicker());
+		//chamber.addMouseListener(new Clicker());
+		chamber.addKeyListener(new Clicker());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(chamber);
 		frame.pack();
