@@ -25,7 +25,7 @@ public class RunGame {
 		frame.setContentPane(chamber);
 		frame.pack();
 	    frame.setVisible(true);
-	    
+	    chamber.requestFocus();
 	}
 	
 	int counter = 0;
