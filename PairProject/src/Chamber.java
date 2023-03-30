@@ -16,6 +16,7 @@ public class Chamber extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
+		this.setFocusable(true);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(chamber, 0, 0, 1000, 750, null);
 		

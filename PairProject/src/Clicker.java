@@ -16,13 +16,11 @@ public class Clicker implements MouseListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int code = e.getKeyCode();
-		System.out.println("e");
 
 		switch (code) {
 		case 37:
 		case 65:
-			System.out.println("e");
-
+			System.out.println(code);
 			break;
 		case 39:
 		case 68:
