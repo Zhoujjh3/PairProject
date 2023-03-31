@@ -12,7 +12,7 @@ public class Player {
 	boolean direction;
 	Image player;
 	
-	enum States{
+	public enum States{
 		IDLE, RUNNING, JUMPING, SWINGING;
 	}
 	States state = States.IDLE;
@@ -29,7 +29,7 @@ public class Player {
 		yPos = 500;
 		
 		velocityX = 0;
-		velocityY = 0;
+		velocityY = -10;
 		accelX = 0;
 		accelY = 0;
 	}
@@ -37,14 +37,30 @@ public class Player {
 	public void updatePlayer() {
 		switch(state) {
 		case IDLE:
-			velocityY = 0;
+			//System.out.println("fjdskljfl");
+			velocityY = -10;
 			velocityX = 0;
 			break;
 		case RUNNING:
+			if(direction) {
+				velocityX = 8;
+				//accelX = 0.5;
+			} else if(!direction) {
+				velocityX = -8;
+				//accelX = -0.5;
+			}
+//			if(velocityX < 6 && velocityX > -6) {
+//				velocityX += accelX;
+//			}
 			
+			xPos += velocityX;
+			//System.out.println("RUNNING");
 			break;
 		case JUMPING: 
-			
+			accelY = 0.5;
+			velocityY += accelY;
+			yPos += velocityY;
+			System.out.println(yPos);
 			break;
 		case SWINGING:
 			
@@ -66,6 +82,14 @@ public class Player {
 	
 	public int getYPos() {
 		return yPos;
+	}
+	
+	public void setVelocityY(double velocityY) {
+		this.velocityY = velocityY;
+	}
+	
+	public void setVelocityX(double velocityX) {
+		this.velocityX = velocityX;
 	}
 	
 	public void changeState(States state) {

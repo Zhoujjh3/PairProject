@@ -15,26 +15,29 @@ public class RunGame {
 	
 	public RunGame() {
 		samurai = new Player();
+		Clicker theClicker = new Clicker(samurai);
 		
 		frame = new JFrame();
 		chamber = new Chamber(samurai, background, obstacles);
 		chamber.setPreferredSize(new Dimension(1000, 750));
-		chamber.addMouseListener(new Clicker());
-		chamber.addKeyListener(new Clicker());
+		chamber.addMouseListener(theClicker);
+		chamber.addKeyListener(theClicker);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(chamber);
 		frame.pack();
 	    frame.setVisible(true);
 	    chamber.requestFocus();
+	    timer.start();
 	}
 	
 	int counter = 0;
 	ActionListener run = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			
+			samurai.updatePlayer();
+			chamber.repaint();
 		}
 	};
-	Timer ShapesTimer = new Timer(5, run);
+	Timer timer = new Timer(5, run);
 	
 
 	public static void main(String[] args) {
