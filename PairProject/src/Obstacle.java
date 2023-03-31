@@ -6,7 +6,7 @@ public abstract class Obstacle {
 	Image obstacle;
 	
 	public int getXPos() {return xPos;}
-	
+	//
 	public int getYPos() {return yPos;}
 	
 	public void drawObstacle(Graphics g) {
