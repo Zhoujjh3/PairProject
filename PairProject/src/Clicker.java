@@ -57,11 +57,11 @@ public class Clicker implements MouseListener, KeyListener {
 
 	public void keyReleased(KeyEvent e) {
 		player.state = Player.States.IDLE;
-		System.out.println("IDLE");
+		//System.out.println("IDLE");
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("e");
+		//System.out.println("e");
 
 	}
 	
