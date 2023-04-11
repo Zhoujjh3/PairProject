@@ -13,7 +13,7 @@ public class Player {
 	Image player;
 	
 	public enum States{
-		IDLE, RUNNING, JUMPING, SWINGING;
+		IDLE, MOVING;
 	}
 	States state = States.IDLE;
 	
@@ -41,7 +41,7 @@ public class Player {
 			velocityY = -10;
 			velocityX = 0;
 			break;
-		case RUNNING:
+		case MOVING:
 			if(direction) {
 				velocityX = 8;
 				//accelX = 0.5;
@@ -56,15 +56,15 @@ public class Player {
 			xPos += velocityX;
 			//System.out.println("RUNNING");
 			break;
-		case JUMPING: 
-			accelY = 0.5;
-			velocityY += accelY;
-			yPos += velocityY;
-			System.out.println(yPos);
-			break;
-		case SWINGING:
-			
-			break;
+//		case JUMPING: 
+//			accelY = 0.5;
+//			velocityY += accelY;
+//			yPos += velocityY;
+//			System.out.println(yPos);
+//			break;
+//		case SWINGING:
+//			
+//			break;
 		}
 	}
 	

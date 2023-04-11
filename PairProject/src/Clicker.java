@@ -22,7 +22,7 @@ public class Clicker implements MouseListener, KeyListener {
 		case 65:
 			//run left
 			player.changeDirection("LEFT");
-			player.state = Player.States.RUNNING;
+			player.state = Player.States.MOVING;
 			//player.setVelocityX(0);
 			System.out.println(code);
 			break;
@@ -30,12 +30,12 @@ public class Clicker implements MouseListener, KeyListener {
 		case 68:
 			//run right
 			player.changeDirection("RIGHT");
-			player.state = Player.States.RUNNING;
+			player.state = Player.States.MOVING;
 			//player.setVelocityX(0);
 			System.out.println(code);
 			break;
 		case 32:
-			player.state = Player.States.JUMPING;
+			player.state = Player.States.MOVING;
 			System.out.println(code);
 			break;
 		case 38:
