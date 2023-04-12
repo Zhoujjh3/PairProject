@@ -1,3 +1,4 @@
+package buggybug;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -57,10 +58,7 @@ public class Clicker implements MouseListener, KeyListener {
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if(player.jump) {
-			player.state = Player.States.IDLE;
-		}
-		
+		player.state = Player.States.IDLE;
 		//System.out.println("IDLE");
 	}
 
