@@ -9,14 +9,14 @@ public class Player {
 	int runCounter, swingCounter;
 	double velocityX, velocityY, accelX, accelY;
 	int xPos, yPos;
-	boolean direction;
-	boolean move, jump, swing;
+	boolean direction, move, jump, swing;
+	boolean[] keyPresses;
 	Image player;
 	
 	public enum States{
 		IDLE, MOVING;
 	}
-	States state = States.IDLE;
+	States state = States.MOVING;
 	
 	Image[] playerStatesX;	//has all frames for running
 	Image[] playerStatesY;	//has all frames for jumping
@@ -33,6 +33,7 @@ public class Player {
 		velocityY = -10;
 		accelX = 0;
 		accelY = 0;
+		keyPresses = new boolean[100];
 		
 		move = false;
 		jump = false;
@@ -40,10 +41,33 @@ public class Player {
 	}
 	
 	public void updatePlayer() {
+		if(move) {
+			if(keyPresses[64] || keyPresses[36]) {
+				changeDirection("LEFT");
+				System.out.println("LEFT");
+				state = States.MOVING;
+			}
+			
+			if(keyPresses[38] || keyPresses[67]) {
+				changeDirection("RIGHT");
+				System.out.println("RIGHT");
+				state = States.MOVING;
+			}
+		} else {
+			state = States.IDLE;
+		}
+		
+		
+		if(keyPresses[31]) {
+			toggleJump();
+			System.out.println("JUMP");
+			state = States.MOVING;
+		}
+		
 		switch(state) {
 		case IDLE:
 			System.out.println("fjdskljfl");
-			velocityY = -10;
+			velocityY = -14;
 			velocityX = 0;
 			
 			move = false;
@@ -51,6 +75,7 @@ public class Player {
 			swing = false;
 			break;
 		case MOVING:
+			System.out.println(move);
 			if(move) {
 				if(direction) {
 					velocityX = 8;
@@ -61,7 +86,7 @@ public class Player {
 				}
 			}
 			
-			if(jump || yPos <= 500) {
+			if(jump && yPos <= 500) {
 				accelY = 0.5;
 				velocityY += accelY;
 				yPos += velocityY;
@@ -72,6 +97,7 @@ public class Player {
 			
 			xPos += velocityX;
 			//System.out.println("RUNNING");
+			
 			break;
 //		case SWINGING:
 //			
@@ -85,6 +111,10 @@ public class Player {
 		} else if(dir.equals("RIGHT")){
 			direction = true;
 		}
+	}
+	
+	public void changeBoolean(int keyValue, boolean newValue) {
+		keyPresses[keyValue - 1] = newValue;
 	}
 	
 	public int getXPos() {

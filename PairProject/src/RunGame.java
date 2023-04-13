@@ -35,7 +35,6 @@ public class RunGame {
 		public void actionPerformed(ActionEvent e) {
 			samurai.updatePlayer();
 			chamber.repaint();
-			System.out.println(samurai.jump);
 		}
 	};
 	Timer timer = new Timer(5, run);

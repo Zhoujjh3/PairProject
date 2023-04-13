@@ -22,21 +22,26 @@ public class Clicker implements MouseListener, KeyListener {
 		case 65:
 			//run left
 			player.setMove(true);
-			player.changeDirection("LEFT");
-			player.state = Player.States.MOVING;
+			player.changeBoolean(code, true);
+//			player.setMove(true);
+//			player.changeDirection("LEFT");
+//			player.state = Player.States.MOVING;
 			System.out.println(code);
 			break;
 		case 39:
 		case 68:
 			//run right
 			player.setMove(true);
-			player.changeDirection("RIGHT");
-			player.state = Player.States.MOVING;
+			player.changeBoolean(code, true);
+//			player.setMove(true);
+//			player.changeDirection("RIGHT");
+//			player.state = Player.States.MOVING;
 			System.out.println(code);
 			break;
 		case 32:	//jump
-			player.toggleJump();
-			player.state = Player.States.MOVING;
+			player.changeBoolean(code, true);
+//			player.toggleJump();
+//			player.state = Player.States.MOVING;
 			System.out.println(code);
 			break;
 		case 38:
@@ -57,9 +62,12 @@ public class Clicker implements MouseListener, KeyListener {
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if(player.jump) {
-			player.state = Player.States.IDLE;
-		}
+		//player.setMove(false);
+		player.changeBoolean(e.getKeyCode(), false);
+		System.out.println("released " + e.getKeyCode());
+//		if(!player.jump) {
+//			player.state = Player.States.IDLE;
+//		}
 		
 		//System.out.println("IDLE");
 	}
