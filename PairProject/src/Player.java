@@ -8,8 +8,8 @@ public class Player {
 
 	int runCounter, swingCounter;
 	double velocityX, velocityY, accelX, accelY;
-	int xPos, yPos;
-	boolean direction, move, jump, swing;
+	int xPos, yPos, direction;
+	boolean move, jump, swing;
 	boolean[] keyPresses;
 	Image player;
 	
@@ -28,9 +28,10 @@ public class Player {
 		player = new ImageIcon("images//swordsman3.png").getImage();
 		xPos = 500;
 		yPos = 500;
+		direction = 3;
 		
 		velocityX = 0;
-		velocityY = -10;
+		velocityY = 0;
 		accelX = 0;
 		accelY = 0;
 		keyPresses = new boolean[100];
@@ -41,75 +42,52 @@ public class Player {
 	}
 	
 	public void updatePlayer() {
-		if(move) {
-			if(keyPresses[64] || keyPresses[36]) {
-				changeDirection("LEFT");
-				System.out.println("LEFT");
-				state = States.MOVING;
-			}
-			
-			if(keyPresses[38] || keyPresses[67]) {
-				changeDirection("RIGHT");
-				System.out.println("RIGHT");
-				state = States.MOVING;
-			}
+				
+		//horizontal movement
+		if(keyPresses[64] || keyPresses[36]) {
+			changeDirection("LEFT");
+			velocityX = -1*Math.abs(velocityX);
+			accelX = -2.5;
+		} else if(keyPresses[38] || keyPresses[67]) {
+			changeDirection("RIGHT");
+			velocityX = Math.abs(velocityX);
+			accelX = 2.5;
 		} else {
-			state = States.IDLE;
-		}
-		
-		
-		if(keyPresses[31]) {
-			toggleJump();
-			System.out.println("JUMP");
-			state = States.MOVING;
-		}
-		
-		switch(state) {
-		case IDLE:
-			System.out.println("fjdskljfl");
-			velocityY = -14;
+			accelX = 0;
 			velocityX = 0;
-			
-			move = false;
-			jump = false;
-			swing = false;
-			break;
-		case MOVING:
-			System.out.println(move);
-			if(move) {
-				if(direction) {
-					velocityX = 8;
-					//accelX = 0.5;
-				} else if(!direction) {
-					velocityX = -8;
-					//accelX = -0.5;
-				}
-			}
-			
-			if(jump && yPos <= 500) {
-				accelY = 0.5;
-				velocityY += accelY;
-				yPos += velocityY;
-			}
-//			if(velocityX < 6 && velocityX > -6) {
-//				velocityX += accelX;
-//			}
-			
-			xPos += velocityX;
-			//System.out.println("RUNNING");
-			
-			break;
-//		case SWINGING:
-//			
-//			break;
 		}
+		if(Math.abs(velocityX) < 15) {
+			velocityX += accelX;
+		}
+				
+		//vertical movement
+		if(keyPresses[31]) {
+			jump = true;
+		}
+		
+		if(jump) {
+			velocityY = -10;
+			accelY = 0.5;
+			jump = false;
+		} else if(yPos > 495) {
+			velocityY = 0;
+			accelY = 0;
+			yPos = 500;
+		}
+		velocityY += accelY;
+
+		xPos += velocityX;
+		yPos += velocityY;
+
 	}
 	
 	public void changeDirection(String dir) {
 		if(dir.equals("LEFT")) {
-			direction = false;
+			direction = 0;
 		} else if(dir.equals("RIGHT")){
-			direction = true;
+			direction = 1;
+		} else {
+			direction = 2;
 		}
 	}
 	
@@ -135,15 +113,6 @@ public class Player {
 	
 	public void changeState(States state) {
 		this.state = state;
-	}
-	
-	public void toggleJump() {
-		if(!jump) {
-			jump = true;
-		} else if(yPos >= 500) {
-			yPos = 500;
-			jump = false;
-		}
 	}
 	
 	public void setMove(boolean move) {
