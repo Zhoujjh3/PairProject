@@ -123,4 +123,6 @@ public class Player {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(player, xPos, yPos, 200, 200, null);
 	}
+	
+	//end
 }
