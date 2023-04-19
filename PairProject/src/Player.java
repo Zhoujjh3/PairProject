@@ -21,11 +21,13 @@ public class Player {
 	Image[] playerStatesX;	//has all frames for running
 	Image[] playerStatesY;	//has all frames for jumping
 	Image[] playerSwing;	//has all frames for swing
-	Image[] playerIdle;		//has all frames for idle
+	Image[] playerIdle = {new ImageIcon("images//swordsman3.png").getImage(), 
+			new ImageIcon("images//swordsman3 left.png").getImage()};
 	
 	public Player() {
+		
 		//player = new ImageIcon(getClass().getClassLoader().getResource("up arrow.png")).getImage();
-		player = new ImageIcon("images//swordsman3.png").getImage();
+		player = playerIdle[0];
 		xPos = 500;
 		yPos = 500;
 		direction = 3;
@@ -45,10 +47,12 @@ public class Player {
 				
 		//horizontal movement
 		if(keyPresses[64] || keyPresses[36]) {
+			player = playerIdle[1];
 			changeDirection("LEFT");
 			velocityX = -1*Math.abs(velocityX);
 			accelX = -2.5;
 		} else if(keyPresses[38] || keyPresses[67]) {
+			player = playerIdle[0];
 			changeDirection("RIGHT");
 			velocityX = Math.abs(velocityX);
 			accelX = 2.5;
