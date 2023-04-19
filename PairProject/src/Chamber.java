@@ -22,5 +22,8 @@ public class Chamber extends JPanel{
 		samurai.drawPlayer(g);
 		g2.setColor(Color.black);
 		g2.fillRect(0, 694, this.getWidth(), this.getHeight()-694);
+		System.out.println("for max");
 	}
+	
+	//Works?
 }

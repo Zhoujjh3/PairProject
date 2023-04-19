@@ -128,5 +128,5 @@ public class Player {
 		g2.drawImage(player, xPos, yPos, 200, 200, null);
 	}
 	
-	//end
+	//end 2
 }

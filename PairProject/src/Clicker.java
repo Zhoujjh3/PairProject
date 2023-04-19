@@ -38,4 +38,5 @@ public class Clicker implements MouseListener, KeyListener {
 	public void mouseExited(MouseEvent e) {
 	}
 
+	//end
 }
