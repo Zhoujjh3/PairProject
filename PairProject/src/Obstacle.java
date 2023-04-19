@@ -11,6 +11,7 @@ public abstract class Obstacle {
 	
 	public void drawObstacle(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		System.out.println("yes");
 		g2.drawImage(obstacle, xPos, yPos, 200, 200, null);
 	}
 	
