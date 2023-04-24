@@ -30,11 +30,12 @@ public class RunGame {
 	    timer.start();
 	}
 	
-	int counter = 0;
+	public static int counter = 0;
 	ActionListener run = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			samurai.updatePlayer();
 			chamber.repaint();
+			counter++;
 		}
 	};
 	Timer timer = new Timer(5, run);
