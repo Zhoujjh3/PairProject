@@ -109,6 +109,7 @@ public class Player {
 			jump = true;
 		}
 		
+		//changing sprites
 		if(midAir) {
 			if(direction == 1) {
 				player = playerJump[0];
@@ -173,7 +174,7 @@ public class Player {
 	
 	public void drawPlayer(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(player, xPos, yPos, 200, 200, null);
+		g2.drawImage(player, xPos, yPos, 150, 150, null);
 	}
 	
 	public void updateRunCounter() {

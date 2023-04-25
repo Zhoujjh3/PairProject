@@ -17,12 +17,15 @@ public class Chamber extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		//g2.setColor(new Color(1,0,20,90));
+		//g2.fillRect(0, 0, this.getWidth(), this.getHeight());
+		
 		g2.drawImage(chamber, 0, 0, 1000, 750, null);
 		
 		samurai.drawPlayer(g);
-		g2.setColor(Color.black);
+		//g2.setColor(Color.black);
 		g2.fillRect(0, 694, this.getWidth(), this.getHeight()-694);
-		//System.out.println("for max");
+		
 	}
 	
 	//Works?
