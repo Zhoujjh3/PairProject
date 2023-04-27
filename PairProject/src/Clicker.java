@@ -24,7 +24,7 @@ public class Clicker implements MouseListener, KeyListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		//System.out.println("e");
+		player.changeSwing(true);
 
 	}
 	

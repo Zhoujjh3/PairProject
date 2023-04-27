@@ -132,7 +132,6 @@ public class Player {
 			playerTorso = playerRunRightTorso[(int)runCounter];
 			playerLegs = playerRunRightLegs[(int)runCounter];
 			
-			
 			changeDirection("RIGHT");
 			velocityX = Math.abs(velocityX);
 			accelX = 2.5;
@@ -165,7 +164,12 @@ public class Player {
 		}
 		
 		if(swing) {
-			
+			updateSwingCounter();
+			if(direction == 1) {
+				playerTorso = playerSwingRight[(int)swingCounter];
+			} else if(direction == 0) {
+				playerTorso = playerSwingLeft[(int)swingCounter];
+			}
 		}
 		
 		if(jump && !midAir) {
@@ -199,6 +203,10 @@ public class Player {
 	
 	public void changeBoolean(int keyValue, boolean newValue) {
 		keyPresses[keyValue - 1] = newValue;
+	}
+	
+	public void changeSwing(boolean swing) {
+		this.swing = swing;
 	}
 	
 	public int getXPos() {
@@ -236,7 +244,7 @@ public class Player {
 	}
 	
 	public void updateSwingCounter() {
-		if(swingCounter < 4) {
+		if(swingCounter < 3) {
 			swingCounter += 0.5;
 		} else {
 			swingCounter = 0;
