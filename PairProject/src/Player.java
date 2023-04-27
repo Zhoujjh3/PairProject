@@ -11,47 +11,85 @@ public class Player {
 	int xPos, yPos, direction;
 	boolean move, jump, swing, midAir;
 	boolean[] keyPresses;
-	Image player;
+	Image playerTorso;
+	Image playerLegs;
 	
 	public enum States{
 		IDLE, MOVING;
 	}
 	States state = States.MOVING;
 	
-	Image[] playerRunLeft = 
+	Image[] playerRunLeftTorso = 
 		{
-			new ImageIcon("images//left running frames//swordsman left run1.png").getImage(), 
-			new ImageIcon("images//left running frames//swordsman left run2.png").getImage(), 
-			new ImageIcon("images//left running frames//swordsman left run3.png").getImage(), 
-			new ImageIcon("images//left running frames//swordsman left run4.png").getImage(), 
-			new ImageIcon("images//left running frames//swordsman left run5.png").getImage(), 
-			new ImageIcon("images//left running frames//swordsman left run6.png").getImage(), 
+			new ImageIcon("images//left running frames//l-torso1.png").getImage(), 
+			new ImageIcon("images//left running frames//l-torso2.png").getImage(), 
+			new ImageIcon("images//left running frames//l-torso3.png").getImage(), 
+			new ImageIcon("images//left running frames//l-torso4.png").getImage(), 
+			new ImageIcon("images//left running frames//l-torso5.png").getImage(), 
+			new ImageIcon("images//left running frames//l-torso6.png").getImage()			
 		};
-	Image[] playerRunRight = 
+	Image[] playerRunLeftLegs = 
 		{
-			new ImageIcon("images//right running frames//swordsman right run1.png").getImage(), 
-			new ImageIcon("images//right running frames//swordsman right run2.png").getImage(), 
-			new ImageIcon("images//right running frames//swordsman right run3.png").getImage(), 
-			new ImageIcon("images//right running frames//swordsman right run4.png").getImage(), 
-			new ImageIcon("images//right running frames//swordsman right run5.png").getImage(), 
-			new ImageIcon("images//right running frames//swordsman right run6.png").getImage(), 	
+			new ImageIcon("images//left running frames//l-legs1.png").getImage(), 
+			new ImageIcon("images//left running frames//l-legs2.png").getImage(), 
+			new ImageIcon("images//left running frames//l-legs3.png").getImage(), 
+			new ImageIcon("images//left running frames//l-legs4.png").getImage(), 
+			new ImageIcon("images//left running frames//l-legs5.png").getImage(), 
+			new ImageIcon("images//left running frames//l-legs6.png").getImage()			
 		};
-	Image[] playerSwing;	//has all frames for swing
-	Image[] playerIdle = 
+	Image[] playerRunRightTorso = 
 		{
-			new ImageIcon("images//swordsman right.png").getImage(), 
-			new ImageIcon("images//swordsman left.png").getImage()
+			new ImageIcon("images//right running frames//r-torso1.png").getImage(), 
+			new ImageIcon("images//right running frames//r-torso2.png").getImage(), 
+			new ImageIcon("images//right running frames//r-torso3.png").getImage(), 
+			new ImageIcon("images//right running frames//r-torso4.png").getImage(), 
+			new ImageIcon("images//right running frames//r-torso5.png").getImage(), 
+			new ImageIcon("images//right running frames//r-torso6.png").getImage(), 
+		};
+	Image[] playerRunRightLegs = 
+		{
+			new ImageIcon("images//right running frames//r-legs1.png").getImage(), 
+			new ImageIcon("images//right running frames//r-legs2.png").getImage(), 
+			new ImageIcon("images//right running frames//r-legs3.png").getImage(), 
+			new ImageIcon("images//right running frames//r-legs4.png").getImage(), 
+			new ImageIcon("images//right running frames//r-legs5.png").getImage(), 
+			new ImageIcon("images//right running frames//r-legs6.png").getImage(), 
+		};
+	Image[] playerSwingLeft = 
+		{
+			new ImageIcon("images//swing//leftswing1.png").getImage(),
+			new ImageIcon("images//swing//leftswing2.png").getImage(),
+			new ImageIcon("images//swing//leftswing3.png").getImage(),
+			new ImageIcon("images//swing//leftswing4.png").getImage(),
+		};	
+	Image[] playerSwingRight = 
+		{
+			new ImageIcon("images//swing//rightswing1.png").getImage(),
+			new ImageIcon("images//swing//rightswing2.png").getImage(),
+			new ImageIcon("images//swing//rightswing3.png").getImage(),
+			new ImageIcon("images//swing//rightswing4.png").getImage(),
+		};	
+	Image[] playerIdleLegs = 
+		{
+			new ImageIcon("images//legs right.png").getImage(), 
+			new ImageIcon("images//legs left.png").getImage()
+		};
+	Image[] playerIdleTorso = 
+		{
+			new ImageIcon("images//torso right.png").getImage(), 
+			new ImageIcon("images//torso left.png").getImage()
 		};
 	Image[] playerJump = 
 		{
-			new ImageIcon("images//jump 2.png").getImage(),
-			new ImageIcon("images//jump 2 left.png").getImage()
+			new ImageIcon("images//jump//jump legs right.png").getImage(),
+			new ImageIcon("images//jump//jump legs left.png").getImage()
 		};
 			
 	public Player() {
 		
 		//player = new ImageIcon(getClass().getClassLoader().getResource("up arrow.png")).getImage();
-		player = playerIdle[0];
+		playerTorso = playerIdleTorso[0];
+		playerLegs = playerIdleLegs[0];
 		xPos = 500;
 		yPos = 500;
 		direction = 1;
@@ -72,15 +110,18 @@ public class Player {
 	public void updatePlayer() {
 		
 		if(!move && direction == 1) {
-			player = playerIdle[0];
+			playerTorso = playerIdleTorso[0];
+			playerLegs = playerIdleLegs[0];
 		} else if(!move && direction == 0) {
-			player = playerIdle[1];
+			playerTorso = playerIdleTorso[1];
+			playerLegs = playerIdleLegs[1];
 		}
 				
 		//horizontal movement
 		if(keyPresses[64] || keyPresses[36]) {
 			updateRunCounter();
-			player = playerRunLeft[(int)runCounter];
+			playerTorso = playerRunLeftTorso[(int)runCounter];
+			playerLegs = playerRunLeftLegs[(int)runCounter];
 			
 			changeDirection("LEFT");
 			velocityX = -1*Math.abs(velocityX);
@@ -88,7 +129,9 @@ public class Player {
 			move = true;
 		} else if(keyPresses[38] || keyPresses[67]) {
 			updateRunCounter();
-			player = playerRunRight[(int)runCounter];
+			playerTorso = playerRunRightTorso[(int)runCounter];
+			playerLegs = playerRunRightLegs[(int)runCounter];
+			
 			
 			changeDirection("RIGHT");
 			velocityX = Math.abs(velocityX);
@@ -109,14 +152,20 @@ public class Player {
 			jump = true;
 		}
 		
-		//changing sprites
+		//changing jumping sprites
 		if(midAir) {
 			if(direction == 1) {
-				player = playerJump[0];
+				playerTorso = playerIdleTorso[0];
+				playerLegs = playerJump[0];
 			} else if(direction == 0) {
-				player = playerJump[1];
+				playerTorso = playerIdleTorso[1];
+				playerLegs = playerJump[1];
 			}
 			move = true;
+		}
+		
+		if(swing) {
+			
 		}
 		
 		if(jump && !midAir) {
@@ -174,7 +223,9 @@ public class Player {
 	
 	public void drawPlayer(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(player, xPos, yPos, 150, 150, null);
+		g2.drawImage(playerTorso, xPos, yPos, 186, 134, null);
+		g2.drawImage(playerLegs, xPos, yPos, 186, 134, null);
+		
 	}
 	
 	public void updateRunCounter() {
@@ -182,5 +233,14 @@ public class Player {
 			runCounter += 0.2;
 		else 
 			runCounter = 0;
+	}
+	
+	public void updateSwingCounter() {
+		if(swingCounter < 4) {
+			swingCounter += 0.5;
+		} else {
+			swingCounter = 0;
+			swing = false;
+		}
 	}
 }
