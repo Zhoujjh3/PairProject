@@ -10,7 +10,6 @@ public class Clicker implements MouseListener, KeyListener {
 	
 	public Clicker(Player player) {
 		this.player = player;
-		System.out.println("ugh");
 	}
 	public void keyTyped(KeyEvent e) {
 	}
