@@ -45,7 +45,6 @@ public class RunGame {
 				Projectile cannonBall2 = new CannonBall(100, 245, samurai.getXPos(), samurai.getYPos());
 				projectiles.add(cannonBall2);	
 			}
-			samurai.updatePlayer();
 			for(int i = 0; i < projectiles.size(); i++) {
 				projectiles.get(i).updateProjectile();
 				if(projectiles.get(i).getX() > 1000 || projectiles.get(i).getY() > 750 ||
@@ -53,6 +52,7 @@ public class RunGame {
 					projectiles.remove(i);
 				}
 			}
+			samurai.updatePlayer();
 			chamber.repaint();
 			counter++;
 		}
