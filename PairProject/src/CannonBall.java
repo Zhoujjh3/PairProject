@@ -16,8 +16,6 @@ public class CannonBall extends Projectile {
 		}
 		setXVelocity(4.0*Math.sin(theta) * (direction));
 		setYVelocity(4.0*Math.cos(theta));
-		//setXVelocity(((playerXPos + 93) - x)/100.0);
-		//setYVelocity(((playerYPos + 67) - y)/100.0);
 	}
 
 	
