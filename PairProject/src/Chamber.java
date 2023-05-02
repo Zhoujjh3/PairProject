@@ -9,12 +9,15 @@ public class Chamber extends JPanel{
 	Image chamber;
 	ArrayList<Obstacle> theOPPS;
 	ArrayList<Projectile> thePROJ;
+	ArrayList<Platform> thePLAT;
 	
-	public Chamber(Player player, Image background, ArrayList<Obstacle> obstacles, ArrayList<Projectile> projectiles) {
+	public Chamber(Player player, Image background, ArrayList<Obstacle> obstacles, 
+			ArrayList<Projectile> projectiles, ArrayList<Platform> platforms) {
 		samurai = player;
 		chamber = background;
 		theOPPS = obstacles;
 		thePROJ = projectiles;
+		thePLAT = platforms;
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -29,9 +32,12 @@ public class Chamber extends JPanel{
 		for(int i = 0; i < thePROJ.size(); i++) {
 			thePROJ.get(i).drawProjectile(g2);
 		}
+		for(int i = 0; i < thePLAT.size(); i++) {
+			thePLAT.get(i).drawPlatform(g2);
+		}
 		samurai.drawPlayer(g);
 		//g2.setColor(Color.black);
-		g2.fillRect(0, 694, this.getWidth(), this.getHeight()-694);
+		//g2.fillRect(0, 694, this.getWidth(), this.getHeight()-694);
 		
 	}
 	

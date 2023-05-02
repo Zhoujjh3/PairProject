@@ -8,9 +8,10 @@ public class Player {
 
 	double runCounter, swingCounter;
 	double velocityX, velocityY, accelX, accelY;
-	int xPos, yPos, direction;
+	int xPos, yPos, direction, floor;
 	boolean move, jump, swing, midAir;
 	boolean[] keyPresses;
+	int[] hitbox;
 	Image playerTorso;
 	Image playerLegs;
 	
@@ -105,6 +106,8 @@ public class Player {
 		jump = false;
 		swing = false;
 		midAir = false;
+		
+		
 	}
 	
 	public void updatePlayer() {
@@ -145,9 +148,8 @@ public class Player {
 		if(Math.abs(velocityX) < 15) {
 			velocityX += accelX;
 		}
-				
 		//vertical movement
-		if(keyPresses[31]) {
+		if(keyPresses[31] || keyPresses[86]) {
 			jump = true;
 		}
 		
@@ -177,7 +179,7 @@ public class Player {
 			accelY = 0.5;
 			jump = false;
 			midAir = true;
-		} else if(yPos > 495) {
+		} else if(yPos > findFloor(xPos)) {
 			jump = false;
 			midAir = false;
 			velocityY = 0;
@@ -188,6 +190,8 @@ public class Player {
 
 		xPos += velocityX;
 		yPos += velocityY;
+		
+		System.out.println("findFloor: " + findFloor(xPos));
 
 	}
 	
@@ -250,5 +254,15 @@ public class Player {
 			swingCounter = 0;
 			swing = false;
 		}
+	}
+	
+	public double findFloor(int xPos) {
+		
+		for(Platform x : RunGame.platforms) {
+			if(xPos < x.getXLeft() && xPos > x.getXRight()) {
+				floor = (int) x.getRelativeY();
+			}
+		}
+		return 1200;
 	}
 }
