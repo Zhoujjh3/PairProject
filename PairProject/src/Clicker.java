@@ -25,7 +25,7 @@ public class Clicker implements MouseListener, KeyListener {
 
 	public void mouseClicked(MouseEvent e) {
 		player.changeSwing(true);
-
+		System.out.println("x: " + e.getX() + ", y: " + e.getY());
 	}
 	
 	public void mousePressed(MouseEvent e) {
@@ -36,6 +36,4 @@ public class Clicker implements MouseListener, KeyListener {
 	}
 	public void mouseExited(MouseEvent e) {
 	}
-
-	//end
 }

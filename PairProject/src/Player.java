@@ -9,9 +9,9 @@ public class Player {
 	double runCounter, swingCounter;
 	double velocityX, velocityY, accelX, accelY;
 	int xPos, yPos, direction, floor;
-	boolean move, jump, swing, midAir;
+	boolean move, jump, swing, midAir, landed;
 	boolean[] keyPresses;
-	int[] hitbox;
+	hitbox hitbox;
 	Image playerTorso;
 	Image playerLegs;
 	
@@ -87,13 +87,14 @@ public class Player {
 		};
 			
 	public Player() {
-		
 		//player = new ImageIcon(getClass().getClassLoader().getResource("up arrow.png")).getImage();
 		playerTorso = playerIdleTorso[0];
 		playerLegs = playerIdleLegs[0];
 		xPos = 500;
-		yPos = 500;
+		yPos = 100;
 		direction = 1;
+		floor = 0;
+		hitbox = new hitbox(xPos, yPos, xPos+184, yPos+134);
 		
 		runCounter = 0;
 		velocityX = 0;
@@ -105,9 +106,8 @@ public class Player {
 		move = false;
 		jump = false;
 		swing = false;
-		midAir = false;
-		
-		
+		midAir = false;	
+		landed = true;
 	}
 	
 	public void updatePlayer() {
@@ -148,6 +148,7 @@ public class Player {
 		if(Math.abs(velocityX) < 15) {
 			velocityX += accelX;
 		}
+		
 		//vertical movement
 		if(keyPresses[31] || keyPresses[86]) {
 			jump = true;
@@ -174,25 +175,38 @@ public class Player {
 			}
 		}
 		
+		floor = (int) findFloor();
+		
+		velocityY += accelY;
+		xPos += velocityX;
+		yPos += velocityY;
+		
 		if(jump && !midAir) {
 			velocityY = -15;
 			accelY = 0.5;
 			jump = false;
 			midAir = true;
-		} else if(yPos > findFloor(xPos)) {
+			landed = false;
+		} 
+		else if(yPos+134 <= floor) {	
+			//midAir = true;
+			accelY = 0.5;
+		}
+		else if(yPos+134 >= floor && !landed) {
 			jump = false;
 			midAir = false;
 			velocityY = 0;
 			accelY = 0;
-			yPos = 500;
+			landed = true;
+			yPos = floor-131;
 		}
-		velocityY += accelY;
-
-		xPos += velocityX;
-		yPos += velocityY;
+		else if(landed) {	
+			velocityY = 0;
+			accelY = 0;
+			yPos = floor-131;
+		}
 		
-		System.out.println("findFloor: " + findFloor(xPos));
-
+		hitbox = new hitbox((int) xPos, (int) yPos, 134, 184);
 	}
 	
 	public void changeDirection(String dir) {
@@ -205,6 +219,48 @@ public class Player {
 		}
 	}
 	
+	public void drawPlayer(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(playerTorso, xPos, yPos, 186, 134, null);
+		g2.drawImage(playerLegs, xPos, yPos, 186, 134, null);
+		
+		hitbox.drawHitBox(g2);
+	}
+	
+	public void updateRunCounter() {
+		if(runCounter < 5)
+			runCounter += 0.2;
+		else 
+			runCounter = 0;
+	}
+	
+	public void updateSwingCounter() {
+		if(swingCounter < 3) {
+			swingCounter += 0.5;
+		} else {
+			swingCounter = 0;
+			swing = false;
+		}
+	}
+
+	public double findFloor() {
+		double temp = 1000;
+		double max = 1000;
+		for(Platform p : RunGame.platforms) {
+			if(hitbox.checkXOverlap(p.getHitBox()) && hitbox.getBottomY() <= (p.getHitBox().getTopY()+3)) {
+				if(p.getHitBox().getTopY() < max) {
+					temp = p.getHitBox().getTopY();
+					max = temp;
+				}				
+			}
+		}
+		return temp;
+	}
+	
+	public hitbox getHitBox() {
+		return hitbox;
+	}
+
 	public void changeBoolean(int keyValue, boolean newValue) {
 		keyPresses[keyValue - 1] = newValue;
 	}
@@ -232,37 +288,5 @@ public class Player {
 	public void changeState(States state) {
 		this.state = state;
 	}
-	
-	public void drawPlayer(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(playerTorso, xPos, yPos, 186, 134, null);
-		g2.drawImage(playerLegs, xPos, yPos, 186, 134, null);
-		
-	}
-	
-	public void updateRunCounter() {
-		if(runCounter < 5)
-			runCounter += 0.2;
-		else 
-			runCounter = 0;
-	}
-	
-	public void updateSwingCounter() {
-		if(swingCounter < 3) {
-			swingCounter += 0.5;
-		} else {
-			swingCounter = 0;
-			swing = false;
-		}
-	}
-	
-	public double findFloor(int xPos) {
-		
-		for(Platform x : RunGame.platforms) {
-			if(xPos < x.getXLeft() && xPos > x.getXRight()) {
-				floor = (int) x.getRelativeY();
-			}
-		}
-		return 1200;
-	}
+
 }
