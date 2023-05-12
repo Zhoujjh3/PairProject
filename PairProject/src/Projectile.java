@@ -7,6 +7,8 @@ public abstract class Projectile {
 	
 	private double x, y, xVelocity, yVelocity;
 	private Color theColor;
+	private String name;
+	private int counterStart;
 	
 	Projectile(int x, int y) {
 		this.x = x;
@@ -43,4 +45,18 @@ public abstract class Projectile {
 		x += xVelocity;
 		y += yVelocity;
 	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getCounterStart() {
+		return counterStart;
+	}
+	
+	public abstract Projectile[] explode(int numberOfPieces);
 }

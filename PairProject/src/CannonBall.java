@@ -16,12 +16,19 @@ public class CannonBall extends Projectile {
 		}
 		setXVelocity(4.0*Math.sin(theta) * (direction));
 		setYVelocity(4.0*Math.cos(theta));
+		setName("cannonball");
 	}
 
+	CannonBall(int x, int y, double xVelocity, double yVelocity) {
+		super(x,y);
+		setXVelocity(xVelocity);
+		setYVelocity(yVelocity);
+	}
 	
-	
-	
-	
-	
+	public Projectile[] explode(int numberOfPieces) {
+		
+		return new Projectile[0];
+		
+	}
 	
 }

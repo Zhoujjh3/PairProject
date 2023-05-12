@@ -32,9 +32,9 @@ public class RunGame {
 		System.out.println(platforms.size());
 
 		samurai = new Player();
-		Obstacle cannon1 = new Cannon(900, 200);
+		Obstacle cannon1 = new Cannon(900, 200, new ImageIcon("images//cannon.png").getImage());
 		obstacles.add(cannon1);
-		Obstacle cannon2 = new Cannon(0, 200);
+		Obstacle cannon2 = new Cannon(0, 200, new ImageIcon("images//cannon.png").getImage());
 		obstacles.add(cannon2);
 		Clicker theClicker = new Clicker(samurai);
 		
@@ -60,14 +60,35 @@ public class RunGame {
 	ActionListener run = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			//if(state == gameState.PLAYGAME) {
-				if(counter % 100 == 0) {
-					Projectile cannonBall1 = 
-							new CannonBall(890, 245, samurai.getXPos(), samurai.getYPos());
+				if(counter % 1000000 == 0) {
+					CannonBall cannonBall1 = new CannonBall(910, 245, samurai.getXPos(), samurai.getYPos());
 					projectiles.add(cannonBall1);	
-					Projectile cannonBall2 = 
-							new CannonBall(100, 245, samurai.getXPos(), samurai.getYPos());
-					projectiles.add(cannonBall2);	
+					CannonBall cannonBall2 = new CannonBall(90, 245, samurai.getXPos(), samurai.getYPos());
+					projectiles.add(cannonBall2);
+				} else if (counter % 100 == 0) {
+					BuckShot buckShot1 = new BuckShot(910, 245, samurai.getXPos(), samurai.getYPos(), counter);
+					projectiles.add(buckShot1);	
+					BuckShot buckShot2 = new BuckShot(90, 245, samurai.getXPos(), samurai.getYPos(), counter);
+					projectiles.add(buckShot2);
 				}
+				for(int i = 0; i < projectiles.size(); i++) {
+					projectiles.get(i).updateProjectile();
+					if(projectiles.get(i).getName() == "buckshot") {
+						if(counter - projectiles.get(i).getCounterStart() == 100) {
+							Projectile[] explodedPieces;
+							explodedPieces = projectiles.get(i).explode(100);
+							for(int a = 0; a < explodedPieces.length; a++) {
+								projectiles.add(explodedPieces[a]);
+							}
+
+						}
+					}
+					if(projectiles.get(i).getX() > 1000 || projectiles.get(i).getY() > 750 ||
+					projectiles.get(i).getX() < 0 || projectiles.get(i).getY() < 0) {
+						projectiles.remove(i);
+					}
+				}
+				
 				if(counter % 70 == 0) {
 					double rng = Math.random()*700;
 					Platform plat = new Platform(0, rng);
@@ -78,14 +99,6 @@ public class RunGame {
 					}
 					platforms.add(plat);
 				}
-				
-//				for(int i = 0; i < projectiles.size(); i++) {
-//					projectiles.get(i).updateProjectile();
-//					if(projectiles.get(i).getX() > 1000 || projectiles.get(i).getY() > 750 ||
-//					projectiles.get(i).getX() < 0 || projectiles.get(i).getY() < 0) {
-//						projectiles.remove(i);
-//					}
-//				}
 				
 				for(int i = 0; i < platforms.size(); i++) {
 					platforms.get(i).updatePlatform(2);
@@ -118,3 +131,5 @@ public class RunGame {
 		new RunGame();
 	}
 }
+
+

@@ -1,14 +1,10 @@
-import java.awt.Graphics;
+import java.awt.*;
 
 public class Cannon extends Obstacle {
 
 	
-	Cannon(int x, int y) {
-		super(x, y);
-	}
-	
-	public void shoot(Graphics g) {
-		
+	Cannon(int x, int y, Image visual) {
+		super(x, y, visual);
 	}
 	
 }
