@@ -48,20 +48,29 @@ public class Hitbox {
 		} else if(getLeftX() <= otherObject.getRightX() && getRightX() >= otherObject.getRightX()) {
 			//collide on the right
 			temp = true;
+		} else if(getRightX() >= otherObject.getLeftX() && getLeftX() <= otherObject.getLeftX()) {
+			//collide on the right
+			temp = true;
 		} else if(getLeftX() >= otherObject.getLeftX() && getRightX() <= otherObject.getRightX()) {
 			//within
 			temp = true;
-		}
+		} 
 		return temp;
 	}
 	
 	public boolean checkYOverlap(Hitbox otherObject) {
 		boolean temp = false;
-		if(getBottomY() >= otherObject.getTopY() && getBottomY() <= otherObject.getTopY()) {
-			//top collision
+		if(getTopY() <= otherObject.getTopY() && getBottomY() >= otherObject.getBottomY()) {
+			//collide on the left
 			temp = true;
-		} else if(getTopY() <= otherObject.getBottomY() && getTopY() >= otherObject.getTopY()){ 
-			//bottom collision
+		} else if(getTopY() <= otherObject.getBottomY() && getBottomY() >= otherObject.getBottomY()) {
+			//collide on the right
+			temp = true;
+		} else if(getBottomY() >= otherObject.getTopY() && getTopY() <= otherObject.getTopY()) {
+			//collide on the right
+			temp = true;
+		} else if(getTopY() >= otherObject.getTopY() && getBottomY() <= otherObject.getBottomY()) {
+			//within
 			temp = true;
 		}
 		return temp;
@@ -90,7 +99,7 @@ public class Hitbox {
 	public double getHeight() {
 		return height;
 	}
-	
+
 	public double getWidth() {
 		return width;
 	}
