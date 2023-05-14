@@ -130,6 +130,8 @@ public class RunGame {
 				
 			}
 			
+			System.out.print("a");
+			
 			samurai.updatePlayer();
 			chamber.repaint();
 			counter++;
