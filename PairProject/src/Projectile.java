@@ -9,20 +9,27 @@ public abstract class Projectile {
 	private Color theColor;
 	private String name;
 	private int counterStart;
+	private Hitbox hitbox;
 	
-	Projectile(int x, int y) {
+	Projectile(double x, double y) {
 		this.x = x;
 		this.y = y;
+		hitbox = new Hitbox(x, y, 10, 10);
 	}
 	
 	public void drawProjectile(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(theColor);
 		g2.fillOval((int) Math.rint(x), (int) Math.rint(y), 10, 10);
+		hitbox.drawHitBox(g2);
 	}
 	
 	public void setColor(Color theColor) {
 		this.theColor = theColor;
+	}
+	
+	public Hitbox getHitBox() {
+		return hitbox;
 	}
 	
 	public void setXVelocity(double speed) {
@@ -44,6 +51,7 @@ public abstract class Projectile {
 	public void updateProjectile() {
 		x += xVelocity;
 		y += yVelocity;
+		hitbox = new Hitbox(x, y, 10, 10);
 	}
 	
 	public void setName(String name) {

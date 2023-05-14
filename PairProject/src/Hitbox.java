@@ -1,38 +1,38 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class hitbox {
+public class Hitbox {
 	
 	Coordinate[] hitbox;
-	int xPos, yPos, height, width;
+	double x, y, height, width;
 	
-	public hitbox(int xPos, int yPos, int height, int width) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+	public Hitbox(double x, double y, double height, double width) {
+		this.x = x;
+		this.y = y;
 		this.height = height;
 		this.width = width;
 		
 		hitbox = new Coordinate[4];
-		hitbox[0] = new Coordinate(xPos, yPos);					//top left
-		hitbox[1] = new Coordinate(xPos+width, yPos);			//top right
-		hitbox[2] = new Coordinate(xPos+width, yPos+height);	//bottom right
-		hitbox[3] = new Coordinate(xPos, yPos+height);			//bottom left
+		hitbox[0] = new Coordinate(x, y);					//top left
+		hitbox[1] = new Coordinate(x+width, y);			//top right
+		hitbox[2] = new Coordinate(x+width, y+height);	//bottom right
+		hitbox[3] = new Coordinate(x, y+height);			//bottom left
 	}
 	
-	public hitbox(Coordinate a, Coordinate b, Coordinate c, Coordinate d) {
+	public Hitbox(Coordinate a, Coordinate b, Coordinate c, Coordinate d) {
 		hitbox = new Coordinate[4];
 		hitbox[0] = a;					
 		hitbox[1] = b;			
 		hitbox[2] = c;	
 		hitbox[3] = d;	
 		
-		this.xPos = hitbox[0].getX();
-		this.yPos = hitbox[0].getY();
+		this.x = hitbox[0].getX();
+		this.y = hitbox[0].getY();
 		this.height = hitbox[2].getY() - hitbox[0].getY();
 		this.width = hitbox[1].getX() - hitbox[0].getX();
 	}
 	
-	public boolean checkCollision(hitbox otherObject) {
+	public boolean checkCollision(Hitbox otherObject) {
 		if(checkXOverlap(otherObject) && checkYOverlap(otherObject)) {
 			return true;
 		} else {
@@ -40,7 +40,7 @@ public class hitbox {
 		}
 	}
 	
-	public boolean checkXOverlap(hitbox otherObject) {
+	public boolean checkXOverlap(Hitbox otherObject) {
 		boolean temp = false;
 		if(getLeftX() <= otherObject.getLeftX() && getRightX() >= otherObject.getLeftX()) {
 			//collide on the left
@@ -55,7 +55,7 @@ public class hitbox {
 		return temp;
 	}
 	
-	public boolean checkYOverlap(hitbox otherObject) {
+	public boolean checkYOverlap(Hitbox otherObject) {
 		boolean temp = false;
 		if(getBottomY() >= otherObject.getTopY() && getBottomY() <= otherObject.getTopY()) {
 			//top collision
@@ -71,33 +71,34 @@ public class hitbox {
 		return hitbox[index];
 	}
 	
-	public int getLeftX() {
-		return xPos;
+	public double getLeftX() {
+		return x;
 	}
 	
-	public int getRightX() {
-		return xPos + width;
+	public double getRightX() {
+		return x + width;
 	}
 	
-	public int getTopY() {
-		return yPos;
+	public double getTopY() {
+		return y;
 	}
 	
-	public int getBottomY() {
-		return yPos + height;
+	public double getBottomY() {
+		return y + height;
 	}
 	
-	public int getHeight() {
+	public double getHeight() {
 		return height;
 	}
 	
-	public int getWidth() {
+	public double getWidth() {
 		return width;
 	}
 	
 	public void drawHitBox(Graphics g) {
 		g.setColor(Color.red);
-		g.drawRect(xPos, yPos, width, height);
+		g.drawRect((int) Math.rint(x), (int) Math.rint(y), 
+		(int) Math.rint(width), (int) Math.rint(height));
 		//g.setColor(Color.blue);
 		//g.drawLine(getLeftX(), getBottomY(), getRightX(), getBottomY());
 	}

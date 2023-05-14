@@ -6,14 +6,14 @@ import javax.swing.ImageIcon;
 
 public class Player {
 
-	double runCounter, swingCounter;
-	double velocityX, velocityY, accelX, accelY;
-	int xPos, yPos, direction, floor;
-	boolean move, jump, swing, midAir, landed;
-	boolean[] keyPresses;
-	hitbox hitbox;
-	Image playerTorso;
-	Image playerLegs;
+	private double runCounter, swingCounter;
+	private double XVelocity, YVelocity, accelX, accelY;
+	private double x, y, direction, floor;
+	private boolean move, jump, swing, midAir, landed;
+	private boolean[] keyPresses;
+	private Hitbox hitbox;
+	private Image playerTorso;
+	private Image playerLegs;
 	
 	public enum States{
 		IDLE, MOVING;
@@ -90,15 +90,15 @@ public class Player {
 		//player = new ImageIcon(getClass().getClassLoader().getResource("up arrow.png")).getImage();
 		playerTorso = playerIdleTorso[0];
 		playerLegs = playerIdleLegs[0];
-		xPos = 500;
-		yPos = 100;
+		x = 500;
+		y = 100;
 		direction = 1;
 		floor = 0;
-		hitbox = new hitbox(xPos, yPos, xPos+184, yPos+134);
+		hitbox = new Hitbox(x, y, x+184, y+134);
 		
 		runCounter = 0;
-		velocityX = 0;
-		velocityY = 0;
+		XVelocity = 0;
+		YVelocity = 0;
 		accelX = 0;
 		accelY = 0;
 		keyPresses = new boolean[100];
@@ -127,7 +127,7 @@ public class Player {
 			playerLegs = playerRunLeftLegs[(int)runCounter];
 			
 			changeDirection("LEFT");
-			velocityX = -1*Math.abs(velocityX);
+			XVelocity = -1*Math.abs(XVelocity);
 			accelX = -2.5;
 			move = true;
 		} else if(keyPresses[38] || keyPresses[67]) {
@@ -136,17 +136,17 @@ public class Player {
 			playerLegs = playerRunRightLegs[(int)runCounter];
 			
 			changeDirection("RIGHT");
-			velocityX = Math.abs(velocityX);
+			XVelocity = Math.abs(XVelocity);
 			accelX = 2.5;
 			move = true;
 		} else {
 			accelX = 0;
-			velocityX = 0;
+			XVelocity = 0;
 			runCounter = 0;
 			move = false;
 		}
-		if(Math.abs(velocityX) < 15) {
-			velocityX += accelX;
+		if(Math.abs(XVelocity) < 15) {
+			XVelocity += accelX;
 		}
 		
 		//vertical movement
@@ -177,36 +177,36 @@ public class Player {
 		
 		floor = (int) findFloor();
 		
-		velocityY += accelY;
-		xPos += velocityX;
-		yPos += velocityY;
+		YVelocity += accelY;
+		x += XVelocity;
+		y += YVelocity;
 		
 		if(jump && !midAir) {
-			velocityY = -15;
+			YVelocity = -15;
 			accelY = 0.5;
 			jump = false;
 			midAir = true;
 			landed = false;
 		} 
-		else if(yPos+134 <= floor) {	
+		else if(y+134 <= floor) {	
 			//midAir = true;
 			accelY = 0.5;
 		}
-		else if(yPos+134 >= floor && !landed) {
+		else if(y+134 >= floor && !landed) {
 			jump = false;
 			midAir = false;
-			velocityY = 0;
+			YVelocity = 0;
 			accelY = 0;
 			landed = true;
-			yPos = floor-131;
+			y = floor-131;
 		}
 		else if(landed) {	
-			velocityY = 0;
+			YVelocity = 0;
 			accelY = 0;
-			yPos = floor-131;
+			y = floor-131;
 		}
 		
-		hitbox = new hitbox((int) xPos, (int) yPos, 134, 184);
+		hitbox = new Hitbox(x, y, 134, 184);
 	}
 	
 	public void changeDirection(String dir) {
@@ -221,8 +221,8 @@ public class Player {
 	
 	public void drawPlayer(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(playerTorso, xPos, yPos, 186, 134, null);
-		g2.drawImage(playerLegs, xPos, yPos, 186, 134, null);
+		g2.drawImage(playerTorso, (int) Math.rint(x), (int) Math.rint(y), 186, 134, null);
+		g2.drawImage(playerLegs, (int) Math.rint(x), (int) Math.rint(y), 186, 134, null);
 		
 		hitbox.drawHitBox(g2);
 	}
@@ -257,7 +257,7 @@ public class Player {
 		return temp;
 	}
 	
-	public hitbox getHitBox() {
+	public Hitbox getHitBox() {
 		return hitbox;
 	}
 
@@ -269,20 +269,20 @@ public class Player {
 		this.swing = swing;
 	}
 	
-	public int getXPos() {
-		return xPos;
+	public double getX() {
+		return x;
 	}
 	
-	public int getYPos() {
-		return yPos;
+	public double getY() {
+		return y;
 	}
 	
-	public void setVelocityY(double velocityY) {
-		this.velocityY = velocityY;
+	public void setYVelocity(double YVelocity) {
+		this.YVelocity = YVelocity;
 	}
 	
-	public void setVelocityX(double velocityX) {
-		this.velocityX = velocityX;
+	public void setXVelocity(double XVelocity) {
+		this.XVelocity = XVelocity;
 	}
 	
 	public void changeState(States state) {

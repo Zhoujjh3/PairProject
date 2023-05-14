@@ -8,25 +8,25 @@ public class Platform {
 	double X, relativeY;	//y coordinates 
 	double absoluteY;		//the height
 	Image floatingPlatform = new ImageIcon("images//floating platform.png").getImage(); 
-	hitbox platformHitBox;
+	Hitbox platformHitBox;
 	
 	public Platform(double absoluteY, double X) {
 		this.X = X;
 		this.absoluteY = absoluteY;
 		relativeY = 0;
-		platformHitBox = new hitbox((int) X, (int) relativeY, 65, 200);
+		platformHitBox = new Hitbox((int) X, (int) relativeY, 65, 200);
 	}
 	
 	public Platform(double absoluteY, double X, double relativeY) {
 		this.X = X;
 		this.absoluteY = absoluteY;
 		this.relativeY = relativeY;
-		platformHitBox = new hitbox((int) X, (int) relativeY, 65, 200);
+		platformHitBox = new Hitbox((int) X, (int) relativeY, 65, 200);
 	}
 	
 	public void updatePlatform(double fallRate) {
 		relativeY += fallRate;
-		platformHitBox = new hitbox((int) X, (int) relativeY, 65, 200);
+		platformHitBox = new Hitbox((int) X, (int) relativeY, 65, 200);
 	}
 	
 	public void drawPlatform(Graphics g) {
@@ -50,7 +50,7 @@ public class Platform {
 		return relativeY;
 	}
 	
-	public hitbox getHitBox() {
+	public Hitbox getHitBox() {
 		return platformHitBox;
 	}
 

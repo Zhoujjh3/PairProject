@@ -56,7 +56,24 @@ public class RunGame {
 		public void actionPerformed(ActionEvent e) {
 			// if(state == gameState.PLAYGAME) {
 
+			if (counter % 70 == 0) {
+				double rng = Math.random() * 700;
+				Platform plat = new Platform(0, rng);
+				Platform plat2 = new Platform(0, 700 - rng);
 
+				if (Math.random() * 100 % 2 == 0) {
+					platforms.add(plat2);
+				}
+				platforms.add(plat);
+			}
+
+			for (int i = 0; i < platforms.size(); i++) {
+				platforms.get(i).updatePlatform(2);
+				if (platforms.get(i).relativeY > 750) {
+					platforms.remove(i);
+				}
+			}
+			
 			if (counter % 500 == 0) {
 				Obstacle cannon1 = new Cannon(900, -100, new ImageIcon("images//cannon.png").getImage(), counter);
 				obstacles.add(cannon1);
@@ -66,14 +83,14 @@ public class RunGame {
 			
 			for (int i = 0; i < obstacles.size(); i++) {
 				obstacles.get(i).updateObstacle();
-				if((counter - obstacles.get(i).getCounterStart()) % 1 == 0) {
+				if((counter - obstacles.get(i).getCounterStart()) % 100 == 0) {
 					if(obstacles.get(i).getX() < 500) {
 						BuckShot buckShot1 = new BuckShot((int) Math.rint(obstacles.get(i).getX() + 90), 
-						(int) Math.rint(obstacles.get(i).getY() + 50), samurai.getXPos(), samurai.getYPos(), counter);
+						(int) Math.rint(obstacles.get(i).getY() + 50), samurai.getX(), samurai.getY(), counter);
 						projectiles.add(buckShot1);
 					} else {
 						BuckShot buckShot1 = new BuckShot((int) Math.rint(obstacles.get(i).getX() + 10), 
-						(int) Math.rint(obstacles.get(i).getY() + 50), samurai.getXPos(), samurai.getYPos(), counter);
+						(int) Math.rint(obstacles.get(i).getY() + 50), samurai.getX(), samurai.getY(), counter);
 						projectiles.add(buckShot1);
 					}
 				}
@@ -103,31 +120,16 @@ public class RunGame {
 
 					}
 				}
+				
 				if (projectiles.get(i).getX() > 1000 || projectiles.get(i).getY() > 750
-						|| (projectiles.get(i).getX() + 10) < 0 || (projectiles.get(i).getY() + 10) < 0) {
+					|| (projectiles.get(i).getX() + 10) < 0 || (projectiles.get(i).getY() + 10) < 0) {
+					projectiles.remove(i);
+				} else if (projectiles.get(i).getHitBox().checkCollision(samurai.getHitBox())) {
 					projectiles.remove(i);
 				}
+				
 			}
-
-			if (counter % 70 == 0) {
-				double rng = Math.random() * 700;
-				Platform plat = new Platform(0, rng);
-				Platform plat2 = new Platform(0, 700 - rng);
-
-				if (Math.random() * 100 % 2 == 0) {
-					platforms.add(plat2);
-				}
-				platforms.add(plat);
-			}
-
-			for (int i = 0; i < platforms.size(); i++) {
-				platforms.get(i).updatePlatform(2);
-				platforms.get(i).getHitBox().checkCollision(samurai.getHitBox());
-				if (platforms.get(i).relativeY > 750) {
-					platforms.remove(i);
-				}
-			}
-
+			
 			samurai.updatePlayer();
 			chamber.repaint();
 			counter++;

@@ -4,8 +4,8 @@ public class BuckShot extends CannonBall {
 
 	private int counterStart;
 	
-	BuckShot(int x, int y, int playerXPos, int playerYPos, int counter) {
-		super(x, y, playerXPos, playerYPos);
+	BuckShot(double x, double y, double playerX, double playerY, int counter) {
+		super(x, y, playerX, playerY, "playerBased");
 		counterStart = counter;
 		setName("buckshot");
 	}

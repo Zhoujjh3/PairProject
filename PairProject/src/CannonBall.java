@@ -2,12 +2,12 @@ import java.awt.Color;
 
 public class CannonBall extends Projectile {
 
-	CannonBall(int x, int y, int playerXPos, int playerYPos) {
+	CannonBall(double x, double y, double playerX, double playerY, String playerBased) {
 		super(x,y);
-		int playerXMiddle = playerXPos + 93;
-		int playerYMiddle = playerYPos + 67;
+		double playerXMiddle = playerX + 93;
+		double playerYMiddle = playerY + 67;
 		setColor(Color.red);
-		double theta = Math.atan((double) (Math.abs(playerYMiddle - y))/(double) (Math.abs(playerXMiddle - x)));
+		double theta = Math.atan(Math.abs(playerYMiddle - y)/Math.abs(playerXMiddle - x));
 		double xDirection;
 		double yDirection;
 		if((playerXMiddle - x) >= 0) {
@@ -25,7 +25,7 @@ public class CannonBall extends Projectile {
 		setName("cannonball");
 	}
 
-	CannonBall(int x, int y, double xVelocity, double yVelocity) {
+	CannonBall(double x, double y, double xVelocity, double yVelocity) {
 		super(x,y);
 		setXVelocity(xVelocity);
 		setYVelocity(yVelocity);

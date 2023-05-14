@@ -1,23 +1,23 @@
 
 public class Coordinate {
 	
-	int[] coords;
+	double[] coords;
 	
-	public Coordinate(int xPos, int yPos) {
-		coords = new int[2];
-		coords[0] = xPos;
-		coords[1] = yPos;
+	public Coordinate(double x, double y) {
+		coords = new double[2];
+		coords[0] = x;
+		coords[1] = y;
 	}
 	
-	public int[] getCoords() {
+	public double[] getCoords() {
 		return coords;
 	}
 	
-	public int getX() {
+	public double getX() {
 		return coords[0];
 	}
 	
-	public int getY() {
+	public double getY() {
 		return coords[1];
 	}
 }
