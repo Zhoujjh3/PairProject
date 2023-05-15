@@ -22,6 +22,17 @@ public class Chamber extends JPanel{
 			new ImageIcon("images//screens//WS-6.png").getImage()
 	};
 	
+	Image[] tutorialScreens = {
+			new ImageIcon("images//screens//tutorial 1.png").getImage(),
+			new ImageIcon("images//screens//tutorial 2.png").getImage(),
+			new ImageIcon("images//screens//tutorial 3.png").getImage(),
+			new ImageIcon("images//screens//tutorial 4.png").getImage(),
+			new ImageIcon("images//screens//tutorial 5.png").getImage(),
+			new ImageIcon("images//screens//tutorial 6.png").getImage(),
+			new ImageIcon("images//screens//tutorial 6.png").getImage(),
+			new ImageIcon("images//screens//tutorial 6.png").getImage()
+	};
+	
 	Color[] endColors = {
 			new Color(255, 255, 255, 100),
 			new Color(240, 240, 240, 90),
@@ -56,7 +67,10 @@ public class Chamber extends JPanel{
 		if(RunGame.state == RunGame.gameState.WELCOMESCREEN) {
 			g2.drawImage(WelcomeScreens[(int)RunGame.screenCounter], 0, 0, 1000, 750, null);
 			
-		} else if(RunGame.state == RunGame.gameState.PLAYGAME) {
+		} else if(RunGame.state == RunGame.gameState.TUTORIAL){
+			g2.drawImage(tutorialScreens[(int)RunGame.screenCounter], 0, 0, 1000, 750, null);
+			
+		}else if(RunGame.state == RunGame.gameState.PLAYGAME) {
 			R = (int) (RunGame.lightCounter);
 			G = (int) (RunGame.lightCounter);
 			B = (int) RunGame.lightCounter;
@@ -76,7 +90,7 @@ public class Chamber extends JPanel{
 			}
 			samurai.drawPlayer(g);	
 			
-		} else {
+		} else if(RunGame.state == RunGame.gameState.GAMEOVER){
 			if(RunGame.screenCounter < 10) {
 				g2.setColor(endColors[(int) RunGame.screenCounter]);
 				g2.fillRect(0, 0, 1000, 750);

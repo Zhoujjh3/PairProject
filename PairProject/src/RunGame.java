@@ -16,12 +16,12 @@ public class RunGame {
 
 	public static ArrayList<Platform> platforms = new ArrayList<Platform>();
 	public static double lightCounter;
-	boolean changeLight = false;
+	public static boolean tutorial = true;
+	boolean changeLight = true;
 
 	public enum gameState {
-		WELCOMESCREEN, PLAYGAME, GAMEOVER
+		WELCOMESCREEN, TUTORIAL, PLAYGAME, GAMEOVER
 	}
-
 	public static gameState state;
 
 	public RunGame() {
@@ -56,6 +56,15 @@ public class RunGame {
 				if(screenCounter < 5)
 					screenCounter += 0.3;
 				chamber.repaint();
+				
+			} else if(state == gameState.TUTORIAL){
+				tutorial = false;
+				if(screenCounter < 6.5)
+					screenCounter += 0.03;
+				chamber.repaint();
+				if(screenCounter >= 6.5) {
+					state = gameState.PLAYGAME;
+				}
 				
 			} else if(state == gameState.PLAYGAME) {
 				frame.setContentPane(chamber);

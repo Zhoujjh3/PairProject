@@ -37,10 +37,17 @@ public class Clicker implements MouseListener, KeyListener {
 	public void mouseClicked(MouseEvent e) {
 		if(RunGame.state == RunGame.gameState.WELCOMESCREEN) {
 			if(e.getX() >= 420 && e.getX() <= 575) {
-				if(e.getY() >= 595 && e.getY() <= 660) {
+				if(e.getY() >= 595 && e.getY() <= 660 && RunGame.tutorial) {
+					RunGame.state = RunGame.gameState.TUTORIAL;
+					RunGame.screenCounter = 0;
+				} else if(e.getY() >= 595 && e.getY() <= 660) {
 					RunGame.state = RunGame.gameState.PLAYGAME;
+					RunGame.screenCounter = 0;
 				}
 			}
+			
+		} else if(RunGame.state == RunGame.gameState.TUTORIAL){
+			RunGame.state = RunGame.gameState.PLAYGAME;
 			
 		} else if(RunGame.state == RunGame.gameState.PLAYGAME) {
 			player.changeSwing(true);
