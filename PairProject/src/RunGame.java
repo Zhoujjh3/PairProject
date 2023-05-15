@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 
 public class RunGame {
-	//for max again
+	//for max 
 
 	private JFrame frame;
 	private Chamber chamber;
