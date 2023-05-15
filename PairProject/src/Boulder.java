@@ -1,8 +1,8 @@
 
 public class Boulder extends Projectile {
 
-	Boulder(double x, double y, double yVelocity) {
-		super(x,y);
+	/*Boulder(double x, double y, double yVelocity) {
+		super(x,y, 10, 10);
 		setYVelocity(yVelocity);
 	}
 	
@@ -23,5 +23,5 @@ public class Boulder extends Projectile {
 		}
 		return temp;
 	}
-	
+	*/
 }

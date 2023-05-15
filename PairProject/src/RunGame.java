@@ -80,9 +80,9 @@ public class RunGame {
 				}
 	
 				if (counter % 500 == 0) {
-					Obstacle cannon1 = new Cannon(900, -100, new ImageIcon("images//cannon.png").getImage(), counter);
+					Obstacle cannon1 = new Cannon(900, -100, new ImageIcon("images//rightsidecannon.png").getImage(), counter);
 					obstacles.add(cannon1);
-					Obstacle cannon2 = new Cannon(0, -100, new ImageIcon("images//cannon.png").getImage(), counter);
+					Obstacle cannon2 = new Cannon(0, -100, new ImageIcon("images//leftsidecannon.png").getImage(), counter);
 					obstacles.add(cannon2);
 				}
 	
@@ -119,7 +119,7 @@ public class RunGame {
 					if (projectiles.get(i).getName() == "buckshot") {
 						if (counter - projectiles.get(i).getCounterStart() == 100) {
 							Projectile[] explodedPieces;
-							explodedPieces = projectiles.get(i).explode(100);
+							explodedPieces = projectiles.get(i).explode(6);
 							for (int a = 0; a < explodedPieces.length; a++) {
 								projectiles.add(explodedPieces[a]);
 							}

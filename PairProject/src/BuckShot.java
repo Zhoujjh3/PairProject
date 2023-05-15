@@ -1,13 +1,33 @@
 import java.awt.Color;
 
-public class BuckShot extends CannonBall {
+import javax.swing.ImageIcon;
+
+public class BuckShot extends Projectile {
 
 	private int counterStart;
 	
 	BuckShot(double x, double y, double playerX, double playerY, int counter) {
-		super(x, y, playerX, playerY, "playerBased");
+		super(x, y, 25, 25, new ImageIcon("images//buckshot.png").getImage());
 		counterStart = counter;
 		setName("buckshot");
+		double playerXMiddle = playerX + 93;
+		double playerYMiddle = playerY + 67;
+		setColor(Color.red);
+		double theta = Math.atan(Math.abs(playerYMiddle - y)/Math.abs(playerXMiddle - x));
+		double xDirection;
+		double yDirection;
+		if((playerXMiddle - x) >= 0) {
+			xDirection = 1.0;
+		} else {
+			xDirection = -1.0;
+		}
+		if((playerYMiddle - y) >= 0) {
+			yDirection = 1.0;
+		} else {
+			yDirection = -1.0;
+		}
+		setXVelocity(4.0*Math.cos(theta) * (xDirection));
+		setYVelocity(4.0*Math.sin(theta) * (yDirection));
 	}
 	
 	public Projectile[] explode(int numberOfPieces) {

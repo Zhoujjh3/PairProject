@@ -1,26 +1,30 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public abstract class Projectile {
 
 	
-	private double x, y, xVelocity, yVelocity;
+	private double x, y, height, width, xVelocity, yVelocity;
 	private Color theColor;
 	private String name;
 	private int counterStart;
 	private Hitbox hitbox;
+	private Image image;
 	
-	Projectile(double x, double y) {
+	Projectile(double x, double y, double height, double width, Image visual) {
 		this.x = x;
 		this.y = y;
-		hitbox = new Hitbox(x, y, 10, 10);
+		this.width = width;
+		this.height = height;
+		image = visual;
+		hitbox = new Hitbox(x, y, height, width);
 	}
 	
 	public void drawProjectile(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(theColor);
-		g2.fillOval((int) Math.rint(x), (int) Math.rint(y), 10, 10);
+		g2.drawImage(image, (int) Math.rint(x), (int) Math.rint(y), 
+		(int) Math.rint(height), (int) Math.rint(width), null);
+		//g2.fillOval((int) Math.rint(x), (int) Math.rint(y), (int) Math.rint(width), (int) Math.rint(height));
 		hitbox.drawHitBox(g2);
 	}
 	
@@ -51,7 +55,7 @@ public abstract class Projectile {
 	public void updateProjectile() {
 		x += xVelocity;
 		y += yVelocity;
-		hitbox = new Hitbox(x, y, 10, 10);
+		hitbox = new Hitbox(x, y, height, width);
 	}
 	
 	public void setName(String name) {

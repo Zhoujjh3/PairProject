@@ -1,9 +1,11 @@
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
+
 public class CannonBall extends Projectile {
 
-	CannonBall(double x, double y, double playerX, double playerY, String playerBased) {
-		super(x,y);
+	/*CannonBall(double x, double y, double playerX, double playerY, String playerBased) {
+		super(x,y, 25, 25, new ImageIcon("images//cannonball.png").getImage());
 		double playerXMiddle = playerX + 93;
 		double playerYMiddle = playerY + 67;
 		setColor(Color.red);
@@ -23,10 +25,10 @@ public class CannonBall extends Projectile {
 		setXVelocity(4.0*Math.cos(theta) * (xDirection));
 		setYVelocity(4.0*Math.sin(theta) * (yDirection));
 		setName("cannonball");
-	}
+	}*/
 
 	CannonBall(double x, double y, double xVelocity, double yVelocity) {
-		super(x,y);
+		super(x,y, 25, 25, new ImageIcon("images//cannonball.png").getImage());
 		setXVelocity(xVelocity);
 		setYVelocity(yVelocity);
 	}
