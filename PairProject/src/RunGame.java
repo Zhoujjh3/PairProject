@@ -8,7 +8,7 @@ import javax.swing.Timer;
 public class RunGame {
 
 	private JFrame frame;
-	private JPanel chamber, welcomeScreen, gameOverScreen;
+	private Chamber chamber;
 	private Player samurai;
 	private Image background = new ImageIcon("images//background0.png").getImage();;
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
@@ -28,17 +28,14 @@ public class RunGame {
 		state = gameState.WELCOMESCREEN;
 
 		platforms.add(new Platform(0, 500, 250));
-		System.out.println(platforms.size());
-
+		
 		samurai = new Player();
-		Clicker theClicker = new Clicker(samurai);
-
-		lightCounter = 0;
-
 		frame = new JFrame();
 		chamber = new Chamber(samurai, background, obstacles, projectiles, platforms);
 		chamber.setPreferredSize(new Dimension(1000, 750));
+		Clicker theClicker = new Clicker(samurai, chamber);
 
+		lightCounter = 0;
 		frame.addMouseListener(theClicker);
 		frame.addKeyListener(theClicker);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,6 +44,7 @@ public class RunGame {
 		frame.setVisible(true);
 		frame.requestFocus();
 		timer.start();
+
 	}
 
 	public static double screenCounter = 0;
@@ -198,8 +196,10 @@ public class RunGame {
 					changeLight = false;
 				}
 				
-			} else {
-				
+			} else if(state == gameState.GAMEOVER){
+				if(screenCounter < 10)
+					screenCounter += 0.3;
+				chamber.repaint();
 			}
 		}
 	};

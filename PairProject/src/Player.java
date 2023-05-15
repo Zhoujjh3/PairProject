@@ -187,6 +187,10 @@ public class Player {
 			accelY = 0;
 			y = floor - 131;
 		}
+		
+		if(y > 750 || health <= 0) {
+			RunGame.state = RunGame.gameState.GAMEOVER; 
+		}
 
 		if (direction == 0) {
 			hitbox = new Hitbox(x + 75, y + 20, 114, 74);
@@ -263,6 +267,30 @@ public class Player {
 		return temp;
 	}
 
+	public void reset() {
+		playerTorso = playerIdleTorso[0];
+		playerLegs = playerIdleLegs[0];
+		x = 500;
+		y = 100;
+		direction = 1;
+		floor = 0;
+		hitbox = new Hitbox(x + 40, y + 20, 114, 74);
+
+		runCounter = 0;
+		XVelocity = 0;
+		YVelocity = 0;
+		accelX = 0;
+		accelY = 0;
+		keyPresses = new boolean[100];
+
+		move = false;
+		jump = false;
+		swing = false;
+		midAir = false;
+		landed = true;
+	}
+
+	
 	public Hitbox getHitBox() {
 		return hitbox;
 	}

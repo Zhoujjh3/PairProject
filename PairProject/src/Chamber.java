@@ -22,6 +22,21 @@ public class Chamber extends JPanel{
 			new ImageIcon("images//screens//WS-6.png").getImage()
 	};
 	
+	Color[] endColors = {
+			new Color(255, 255, 255, 100),
+			new Color(240, 240, 240, 90),
+			new Color(225, 225, 225, 80),
+			new Color(200, 200, 200, 70),
+			new Color(180, 180, 180, 60),
+			new Color(150, 150, 150, 50),
+			new Color(120, 120, 120, 40),
+			new Color(90, 90, 90, 30),
+			new Color(75, 40, 40, 20),
+			new Color(75, 10, 10, 10)
+	};
+	
+	Image gameOver = new ImageIcon("images//screens//Lose Screen.png").getImage();
+	
 	public Chamber(Player player, Image background, ArrayList<Obstacle> obstacles, 
 			ArrayList<Projectile> projectiles, ArrayList<Platform> platforms) {
 		samurai = player;
@@ -46,7 +61,7 @@ public class Chamber extends JPanel{
 			G = (int) (RunGame.lightCounter);
 			B = (int) RunGame.lightCounter;
 			
-			backgroundColor = new Color(R, G, B, 90);
+			backgroundColor = new Color(R, G, B, 95);
 			g2.setColor(backgroundColor);
 			g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 			
@@ -62,8 +77,25 @@ public class Chamber extends JPanel{
 			samurai.drawPlayer(g);	
 			
 		} else {
-			
+			if(RunGame.screenCounter < 10) {
+				g2.setColor(endColors[(int) RunGame.screenCounter]);
+				g2.fillRect(0, 0, 1000, 750);
+			} else {
+				g2.setColor(new Color(75, 10, 10));
+				g2.fillRect(0, 0, 1000, 750);
+				g2.drawImage(gameOver, 0, 0, 1000, 750, null);
+			}
 		}
-			
+	}
+	
+	public void reset() {
+		theOPPS.removeAll(theOPPS);
+		thePROJ.removeAll(thePROJ);
+		thePLAT.removeAll(thePLAT);
+		R=1;
+		G=0;
+		B=20;
+		backgroundColor = new Color(R,G,B,90);
+		thePLAT.add(new Platform(0, 500, 250));
 	}
 }
