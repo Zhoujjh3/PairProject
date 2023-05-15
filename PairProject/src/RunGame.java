@@ -240,7 +240,6 @@ public class RunGame {
 		} else if (theProjectile.getName().equals("buckshot")) {
 			samurai.setScore(samurai.getScore() + 10);
 		}
-		System.out.println(samurai.getScore());
 	}
 	
 	public static void main(String[] args) {
