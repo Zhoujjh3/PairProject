@@ -290,6 +290,7 @@ public class Player {
 		swing = false;
 		midAir = false;
 		landed = true;
+		score = 0;
 	}
 
 	

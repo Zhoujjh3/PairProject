@@ -68,7 +68,7 @@ public class RunGame {
 						platforms.add(plat2);
 					}
 					platforms.add(plat);
-					samurai.setScore(samurai.getScore() + 1);
+					samurai.setScore(samurai.getScore() + 1 + 2*(counter/500));
 				}
 	
 				for (int i = 0; i < platforms.size(); i++) {
@@ -92,6 +92,7 @@ public class RunGame {
 				}
 	
 				for (int i = 0; i < obstacles.size(); i++) {
+					boolean removed = false;
 					obstacles.get(i).updateObstacle();
 					if ((counter - obstacles.get(i).getCounterStart()) % 100 == 0) {
 						if (obstacles.get(i).getX() < 500) {
@@ -105,33 +106,43 @@ public class RunGame {
 						}
 					}
 					if (obstacles.get(i).getX() > 1000 || obstacles.get(i).getY() > 750
-							|| (obstacles.get(i).getX() + 100) < 0 || (obstacles.get(i).getY() + 100) < 0) {
+							|| (obstacles.get(i).getX() + 100) < 0 || (obstacles.get(i).getY() + 100) < 0 && !removed) {
 						obstacles.remove(i);
+						removed = true;
 						if(i != 0) {
 							i--;
 						}
-					} else if (obstacles.get(i).getHitbox().checkCollision(samurai.getHitBox())) {
+					}
+					
+					if (obstacles.get(i).getHitbox().checkCollision(samurai.getHitBox()) && !removed) {
 						samurai.setScore(samurai.getScore() + 30);
+						removed = true;
 						obstacles.remove(i);
 						samurai.setHealth(samurai.getHealth() - 20);
 						if(i != 0) {
 							i--;
 						}
-					} else if (samurai.getSwordHitBox1() != null && counter < 3000) {
-						if (obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox1())) {
-							samurai.setScore(samurai.getScore() + 30);
-							obstacles.remove(i);
-							if(i != 0) {
-								i--;
-							}
+					} 
+					
+					if (samurai.getSwordHitBox1() != null && counter < 3000 
+					&& obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox1())
+					&& !removed) {
+						samurai.setScore(samurai.getScore() + 30);
+						removed = true;
+						obstacles.remove(i);
+						if(i != 0) {
+							i--;
 						}
-					} else if (samurai.getSwordHitBox2() != null && counter < 3000) {
-						if (obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox2())) {
-							samurai.setScore(samurai.getScore() + 30);
-							obstacles.remove(i);
-							if(i != 0) {
-								i--;
-							}
+					}
+					
+					if (samurai.getSwordHitBox2() != null && counter < 3000 
+					&& obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox2())
+					&& !removed) {
+						samurai.setScore(samurai.getScore() + 30);
+						removed = true;
+						obstacles.remove(i);
+						if(i != 0) {
+							i--;
 						}
 					}
 					
