@@ -88,7 +88,7 @@ public class RunGame {
 					}
 				}
 	
-				if (counter % (1000 - (50 * (counter/500))) == 0) {
+				if (counter % (700 - (50 * (counter/500))) == 0) {
 					Obstacle cannon1 = new Cannon(900, -100, new ImageIcon("images//rightsidecannon.png").getImage(), counter);
 					obstacles.add(cannon1);
 					Obstacle cannon2 = new Cannon(0, -100, new ImageIcon("images//leftsidecannon.png").getImage(), counter);
@@ -122,9 +122,7 @@ public class RunGame {
 						if(i != 0) {
 							i--;
 						}
-					}
-					
-					if (obstacles.get(i).getHitbox().checkCollision(samurai.getHitBox()) && !removed) {
+					} else if (obstacles.get(i).getHitbox().checkCollision(samurai.getHitBox()) && !removed) {
 						samurai.setScore(samurai.getScore() + 30);
 						removed = true;
 						obstacles.remove(i);
@@ -132,9 +130,7 @@ public class RunGame {
 						if(i != 0) {
 							i--;
 						}
-					} 
-					
-					if (samurai.getSwordHitBox1() != null && counter < 3000 
+					}  else if (samurai.getSwordHitBox1() != null && counter < 3000 
 					&& obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox1())
 					&& !removed) {
 						samurai.setScore(samurai.getScore() + 30);
@@ -143,9 +139,7 @@ public class RunGame {
 						if(i != 0) {
 							i--;
 						}
-					}
-					
-					if (samurai.getSwordHitBox2() != null && counter < 3000 
+					} else if (samurai.getSwordHitBox2() != null && counter < 3000 
 					&& obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox2())
 					&& !removed) {
 						samurai.setScore(samurai.getScore() + 30);

@@ -276,6 +276,8 @@ public class Player {
 		direction = 1;
 		floor = 0;
 		hitbox = new Hitbox(x + 40, y + 20, 114, 74);
+		swordHitbox1 = null;
+		swordHitbox2 = null;
 		health = 100;
 
 		runCounter = 0;
