@@ -125,8 +125,7 @@ public class RunGame {
 								i--;
 							}
 						}
-					}
-					if (samurai.getSwordHitBox2() != null && counter < 3000) {
+					} else if (samurai.getSwordHitBox2() != null && counter < 3000) {
 						if (obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox2())) {
 							samurai.setScore(samurai.getScore() + 30);
 							obstacles.remove(i);
