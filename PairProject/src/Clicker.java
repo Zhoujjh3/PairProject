@@ -59,6 +59,7 @@ public class Clicker implements MouseListener, KeyListener {
 					chamber.reset();
 					RunGame.counter = 0;
 					RunGame.screenCounter = 0;
+					RunGame.lightCounter = 0;
 					RunGame.state = RunGame.gameState.WELCOMESCREEN;
 
 				}

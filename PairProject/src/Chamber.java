@@ -75,8 +75,8 @@ public class Chamber extends JPanel{
 			g2.drawImage(background, 0, 0, 1000, 750, null);
 			
 			R = (int) (RunGame.lightCounter);
-			G = (int) (RunGame.lightCounter);
-			B = (int) (RunGame.lightCounter);
+			//G = (int) (RunGame.lightCounter);
+			B = (int) (RunGame.lightCounter/2);
 			
 			g2.setColor(new Color(R, G, B, 90));
 			g2.fillRect(0, 0, this.getWidth(), this.getHeight());
