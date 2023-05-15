@@ -14,24 +14,24 @@ public class Platform {
 		this.X = X;
 		this.absoluteY = absoluteY;
 		relativeY = 0;
-		platformHitBox = new Hitbox((int) X, (int) relativeY, 65, 200);
+		platformHitBox = new Hitbox((int) X, (int) relativeY, 45, 150);
 	}
 	
 	public Platform(double absoluteY, double X, double relativeY) {
 		this.X = X;
 		this.absoluteY = absoluteY;
 		this.relativeY = relativeY;
-		platformHitBox = new Hitbox((int) X, (int) relativeY, 65, 200);
+		platformHitBox = new Hitbox((int) X, (int) relativeY, 45, 150);
 	}
 	
 	public void updatePlatform(double fallRate) {
 		relativeY += fallRate;
-		platformHitBox = new Hitbox((int) X, (int) relativeY, 65, 200);
+		platformHitBox = new Hitbox((int) X, (int) relativeY, 45, 150);
 	}
 	
 	public void drawPlatform(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(floatingPlatform, (int) X, (int) relativeY, 200, 65, null);	
+		g2.drawImage(floatingPlatform, (int) X, (int) relativeY, 150, 45, null);	
 		
 		platformHitBox.drawHitBox(g2);
 //		g2.drawLine((int) getXLeft(), 0, (int) getXLeft(), 1000);

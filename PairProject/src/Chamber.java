@@ -84,6 +84,10 @@ public class Chamber extends JPanel{
 				g2.setColor(new Color(75, 10, 10));
 				g2.fillRect(0, 0, 1000, 750);
 				g2.drawImage(gameOver, 0, 0, 1000, 750, null);
+				g2.setColor(new Color(0, 0, 0));
+				Font font = new Font("Serif", Font.PLAIN, 60);
+				g.setFont(font);
+				g2.drawString("" + samurai.getScore(), 490 - (20* (int) Math.log10(samurai.getScore())), 550);
 			}
 		}
 	}

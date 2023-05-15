@@ -26,8 +26,8 @@ public class BuckShot extends Projectile {
 		} else {
 			yDirection = -1.0;
 		}
-		setXVelocity(4.0*Math.cos(theta) * (xDirection));
-		setYVelocity(4.0*Math.sin(theta) * (yDirection));
+		setXVelocity(5.0*Math.cos(theta) * (xDirection));
+		setYVelocity(5.0*Math.sin(theta) * (yDirection));
 	}
 	
 	public Projectile[] explode(int numberOfPieces) {
@@ -35,7 +35,7 @@ public class BuckShot extends Projectile {
 		Projectile[] cannonBalls = new CannonBall[numberOfPieces];
 		
 		for (int i = 0; i < cannonBalls.length; i++) {
-			double theta = (double) ((i+1) * 2 * Math.PI) / (double) (cannonBalls.length);
+			double theta = ((double) ((i+1) * 2 * Math.PI) / (double) (cannonBalls.length)) + (Math.PI/12);
 			cannonBalls[i] = new CannonBall((int) getX(), (int) getY(), 2 * Math.sin(theta), 2 * Math.cos(theta));
 		}
 		

@@ -60,14 +60,15 @@ public class RunGame {
 			} else if(state == gameState.PLAYGAME) {
 				frame.setContentPane(chamber);
 				if (counter % 70 == 0) {
-					double rng = Math.random() * 700;
+					double rng = (Math.random() * 650) + 100;
 					Platform plat = new Platform(0, rng);
-					Platform plat2 = new Platform(0, 700 - rng);
+					Platform plat2 = new Platform(0, 850 - rng);
 	
 					if (Math.random() * 100 % 2 == 0) {
 						platforms.add(plat2);
 					}
 					platforms.add(plat);
+					samurai.setScore(samurai.getScore() + 1);
 				}
 	
 				for (int i = 0; i < platforms.size(); i++) {
@@ -77,14 +78,14 @@ public class RunGame {
 					}
 				}
 	
-				if (counter % 1000 == 0) {
+				if (counter % (1000 - (50 * (counter/500))) == 0) {
 					Obstacle cannon1 = new Cannon(900, -100, new ImageIcon("images//rightsidecannon.png").getImage(), counter);
 					obstacles.add(cannon1);
 					Obstacle cannon2 = new Cannon(0, -100, new ImageIcon("images//leftsidecannon.png").getImage(), counter);
 					obstacles.add(cannon2);
 				}
 				
-				if(counter != 0 && counter % 100 == 0) {
+				if(counter != 0 && counter % (500 - (10 * (counter/100))) == 0) {
 					Boulder boulder1 = new Boulder((int) ((Math.random() * 740) + 100), 0, 
 					(int) ((double) counter / 1000.0) + 3);
 					projectiles.add(boulder1);
@@ -106,9 +107,19 @@ public class RunGame {
 					if (obstacles.get(i).getX() > 1000 || obstacles.get(i).getY() > 750
 							|| (obstacles.get(i).getX() + 100) < 0 || (obstacles.get(i).getY() + 100) < 0) {
 						obstacles.remove(i);
-					}
-					if (samurai.getSwordHitBox1() != null && counter < 3000) {
+						if(i != 0) {
+							i--;
+						}
+					} else if (obstacles.get(i).getHitbox().checkCollision(samurai.getHitBox())) {
+						samurai.setScore(samurai.getScore() + 30);
+						obstacles.remove(i);
+						samurai.setHealth(samurai.getHealth() - 20);
+						if(i != 0) {
+							i--;
+						}
+					} else if (samurai.getSwordHitBox1() != null && counter < 3000) {
 						if (obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox1())) {
+							samurai.setScore(samurai.getScore() + 30);
 							obstacles.remove(i);
 							if(i != 0) {
 								i--;
@@ -117,6 +128,7 @@ public class RunGame {
 					}
 					if (samurai.getSwordHitBox2() != null && counter < 3000) {
 						if (obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox2())) {
+							samurai.setScore(samurai.getScore() + 30);
 							obstacles.remove(i);
 							if(i != 0) {
 								i--;
@@ -131,7 +143,7 @@ public class RunGame {
 					projectiles.get(i).updateProjectile();
 					if (projectiles.get(i).getName() == "buckshot") {
 						if (counter - projectiles.get(i).getCounterStart() == 100) {
-							Projectile[] explodedPieces = projectiles.get(i).explode(6);
+							Projectile[] explodedPieces = projectiles.get(i).explode(3 + 1 * (counter/400));
 							for (int a = 0; a < explodedPieces.length; a++) {
 								projectiles.add(explodedPieces[a]);
 							}
@@ -151,7 +163,6 @@ public class RunGame {
 							samurai.setHealth(samurai.getHealth() - 20);
 						} else if (projectiles.get(i).getName().equals("buckshot")) {
 							samurai.setHealth(samurai.getHealth() - 10);
-
 						}
 						projectiles.remove(i);
 						removed = true;
@@ -168,6 +179,7 @@ public class RunGame {
 					}
 					if (samurai.getSwordHitBox1() != null && !removed) {
 						if (projectiles.get(i).getHitBox().checkCollision(samurai.getSwordHitBox1())) {
+							changeScore(projectiles.get(i));
 							projectiles.remove(i);
 							removed = true;
 							i--;
@@ -175,6 +187,7 @@ public class RunGame {
 					}
 					if (samurai.getSwordHitBox2() != null && !removed) {
 						if (projectiles.get(i).getHitBox().checkCollision(samurai.getSwordHitBox2())) {
+							changeScore(projectiles.get(i));
 							projectiles.remove(i);
 							removed = true;
 							i--;
@@ -205,6 +218,17 @@ public class RunGame {
 	};
 	Timer timer = new Timer(20, run);
 
+	public void changeScore(Projectile theProjectile) {
+		if(theProjectile.getName().equals("cannonball")) {
+			samurai.setScore(samurai.getScore() + 5);
+		} else if (theProjectile.getName().equals("boulder")) {
+			samurai.setScore(samurai.getScore() + 15);
+		} else if (theProjectile.getName().equals("buckshot")) {
+			samurai.setScore(samurai.getScore() + 10);
+		}
+		System.out.println(samurai.getScore());
+	}
+	
 	public static void main(String[] args) {
 		new RunGame();
 	}

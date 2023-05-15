@@ -16,6 +16,7 @@ public class Player {
 	private Image playerTorso;
 	private Image playerLegs;
 	private int health;
+	private int score = 0;
 	
 	public enum States {
 		IDLE, MOVING;
@@ -338,6 +339,14 @@ public class Player {
 
 	public void changeState(States state) {
 		this.state = state;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public int getScore() {
+		return score;
 	}
 
 }
