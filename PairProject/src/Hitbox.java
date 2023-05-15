@@ -3,7 +3,6 @@ import java.awt.Graphics;
 
 public class Hitbox {
 	
-	Coordinate[] hitbox;
 	double x, y, height, width;
 	
 	public Hitbox(double x, double y, double height, double width) {
@@ -11,25 +10,6 @@ public class Hitbox {
 		this.y = y;
 		this.height = height;
 		this.width = width;
-		
-		hitbox = new Coordinate[4];
-		hitbox[0] = new Coordinate(x, y);					//top left
-		hitbox[1] = new Coordinate(x+width, y);			//top right
-		hitbox[2] = new Coordinate(x+width, y+height);	//bottom right
-		hitbox[3] = new Coordinate(x, y+height);			//bottom left
-	}
-	
-	public Hitbox(Coordinate a, Coordinate b, Coordinate c, Coordinate d) {
-		hitbox = new Coordinate[4];
-		hitbox[0] = a;					
-		hitbox[1] = b;			
-		hitbox[2] = c;	
-		hitbox[3] = d;	
-		
-		this.x = hitbox[0].getX();
-		this.y = hitbox[0].getY();
-		this.height = hitbox[2].getY() - hitbox[0].getY();
-		this.width = hitbox[1].getX() - hitbox[0].getX();
 	}
 	
 	public boolean checkCollision(Hitbox otherObject) {
@@ -74,10 +54,6 @@ public class Hitbox {
 			temp = true;
 		}
 		return temp;
-	}
-	
-	public Coordinate getCoord(int index) {
-		return hitbox[index];
 	}
 	
 	public double getLeftX() {
