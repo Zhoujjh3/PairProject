@@ -7,10 +7,10 @@ import javax.swing.Timer;
 
 public class RunGame {
 
-	JFrame frame;
-	JPanel chamber, welcomeScreen, gameOverScreen;
-	Player samurai;
-	Image background = new ImageIcon("images//background0.png").getImage();;
+	private JFrame frame;
+	private JPanel chamber, welcomeScreen, gameOverScreen;
+	private Player samurai;
+	private Image background = new ImageIcon("images//background0.png").getImage();;
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -79,11 +79,17 @@ public class RunGame {
 					}
 				}
 	
-				if (counter % 500 == 0) {
+				if (counter % 1000 == 0) {
 					Obstacle cannon1 = new Cannon(900, -100, new ImageIcon("images//rightsidecannon.png").getImage(), counter);
 					obstacles.add(cannon1);
 					Obstacle cannon2 = new Cannon(0, -100, new ImageIcon("images//leftsidecannon.png").getImage(), counter);
 					obstacles.add(cannon2);
+				}
+				
+				if(counter != 0 && counter % 100 == 0) {
+					Boulder boulder1 = new Boulder((int) ((Math.random() * 740) + 100), 0, 
+					(int) ((double) counter / 1000.0) + 3);
+					projectiles.add(boulder1);
 				}
 	
 				for (int i = 0; i < obstacles.size(); i++) {
@@ -103,14 +109,23 @@ public class RunGame {
 							|| (obstacles.get(i).getX() + 100) < 0 || (obstacles.get(i).getY() + 100) < 0) {
 						obstacles.remove(i);
 					}
-				}
-	
-				for (int i = 0; i < obstacles.size(); i++) {
-					obstacles.get(i).updateObstacle();
-					if (obstacles.get(i).getX() > 1000 || obstacles.get(i).getY() > 750
-							|| (obstacles.get(i).getX() + 100) < 0 || (obstacles.get(i).getY() + 100) < 0) {
-						obstacles.remove(i);
+					if (samurai.getSwordHitBox1() != null && counter < 3000) {
+						if (obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox1())) {
+							obstacles.remove(i);
+							if(i != 0) {
+								i--;
+							}
+						}
 					}
+					if (samurai.getSwordHitBox2() != null && counter < 3000) {
+						if (obstacles.get(i).getHitbox().checkCollision(samurai.getSwordHitBox2())) {
+							obstacles.remove(i);
+							if(i != 0) {
+								i--;
+							}
+						}
+					}
+					
 				}
 	
 				for (int i = 0; i < projectiles.size(); i++) {
@@ -118,8 +133,7 @@ public class RunGame {
 					projectiles.get(i).updateProjectile();
 					if (projectiles.get(i).getName() == "buckshot") {
 						if (counter - projectiles.get(i).getCounterStart() == 100) {
-							Projectile[] explodedPieces;
-							explodedPieces = projectiles.get(i).explode(6);
+							Projectile[] explodedPieces = projectiles.get(i).explode(6);
 							for (int a = 0; a < explodedPieces.length; a++) {
 								projectiles.add(explodedPieces[a]);
 							}
@@ -133,12 +147,21 @@ public class RunGame {
 						removed = true;
 						i--;
 					} else if (projectiles.get(i).getHitBox().checkCollision(samurai.getHitBox()) && !removed) {
+						if(projectiles.get(i).getName().equals("cannonball")) {
+							samurai.setHealth(samurai.getHealth() - 5);
+						} else if (projectiles.get(i).getName().equals("boulder")) {
+							samurai.setHealth(samurai.getHealth() - 20);
+						} else if (projectiles.get(i).getName().equals("buckshot")) {
+							samurai.setHealth(samurai.getHealth() - 10);
+
+						}
 						projectiles.remove(i);
 						removed = true;
 						i--;
 					} else {
 						for (int c = 0; c < platforms.size() && !removed; c++) {
-							if (projectiles.get(i).getHitBox().checkCollision(platforms.get(c).getHitBox())) {
+							if (projectiles.get(i).getHitBox().checkCollision(platforms.get(c).getHitBox()) 
+								&& !projectiles.get(i).getName().equals("boulder")) {
 								projectiles.remove(i);
 								removed = true;
 								i--;

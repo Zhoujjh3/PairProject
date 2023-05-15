@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,7 +15,8 @@ public class Player {
 	private Hitbox hitbox, swordHitbox1, swordHitbox2;
 	private Image playerTorso;
 	private Image playerLegs;
-
+	private int health;
+	
 	public enum States {
 		IDLE, MOVING;
 	}
@@ -83,6 +85,7 @@ public class Player {
 		swing = false;
 		midAir = false;
 		landed = true;
+		health = 100;
 	}
 
 	public void updatePlayer() {
@@ -206,7 +209,6 @@ public class Player {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(playerTorso, (int) Math.rint(x), (int) Math.rint(y), 186, 134, null);
 		g2.drawImage(playerLegs, (int) Math.rint(x), (int) Math.rint(y), 186, 134, null);
-
 		hitbox.drawHitBox(g2);
 		if (swordHitbox1 != null) {
 			swordHitbox1.drawHitBox(g2);
@@ -214,6 +216,19 @@ public class Player {
 		if (swordHitbox2 != null) {
 			swordHitbox2.drawHitBox(g2);
 		}
+		if (direction == 0) {
+			g2.setColor(Color.RED);
+			g2.fillRect((int) Math.rint(x+55), (int) Math.rint(y+140), 104, 16);
+			g2.setColor(Color.GREEN);
+			g2.fillRect((int) Math.rint(x+58), (int) Math.rint(y+143), (int) (98*((double) health / 100.0)), 10);
+		} else if (direction == 1) {
+			g2.setColor(Color.RED);
+			g2.fillRect((int) Math.rint(x+20), (int) Math.rint(y+140), 104, 16);
+			g2.setColor(Color.GREEN);
+			g2.fillRect((int) Math.rint(x+23), (int) Math.rint(y+143), (int) (98*((double) health / 100.0)), 10);
+
+		}
+		
 	}
 
 	public void updateRunCounter() {
@@ -276,6 +291,14 @@ public class Player {
 		return y;
 	}
 
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
+	public int getHealth() {
+		return health;
+	}
+	
 	public void setYVelocity(double YVelocity) {
 		this.YVelocity = YVelocity;
 	}
