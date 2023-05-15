@@ -220,10 +220,10 @@ public class RunGame {
 				counter++;
 	
 				if (lightCounter < 253 && !changeLight) {
-					lightCounter += 0.1;
+					lightCounter += 0.3;
 				} else {
 					changeLight = true;
-					lightCounter -= 0.1;
+					lightCounter -= 0.3;
 				}
 				if (lightCounter <= 10) {
 					changeLight = false;

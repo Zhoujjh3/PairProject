@@ -47,6 +47,7 @@ public class Chamber extends JPanel{
 	};
 	
 	Image gameOver = new ImageIcon("images//screens//Lose Screen.png").getImage();
+	Image background = new ImageIcon("images//mountain backdrop.png").getImage();
 	
 	public Chamber(Player player, Image background, ArrayList<Obstacle> obstacles, 
 			ArrayList<Projectile> projectiles, ArrayList<Platform> platforms) {
@@ -71,12 +72,13 @@ public class Chamber extends JPanel{
 			g2.drawImage(tutorialScreens[(int)RunGame.screenCounter], 0, 0, 1000, 750, null);
 			
 		}else if(RunGame.state == RunGame.gameState.PLAYGAME) {
+			g2.drawImage(background, 0, 0, 1000, 750, null);
+			
 			R = (int) (RunGame.lightCounter);
 			G = (int) (RunGame.lightCounter);
-			B = (int) RunGame.lightCounter;
+			B = (int) (RunGame.lightCounter);
 			
-			backgroundColor = new Color(R, G, B, 95);
-			g2.setColor(backgroundColor);
+			g2.setColor(new Color(R, G, B, 90));
 			g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 			
 			for(int i = 0; i < theOPPS.size(); i++) {

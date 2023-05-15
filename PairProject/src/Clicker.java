@@ -64,7 +64,6 @@ public class Clicker implements MouseListener, KeyListener {
 				}
 			}
 		}
-		System.out.println("x: " + e.getX() + ", y: " + e.getY());
 	}
 	
 	public void mousePressed(MouseEvent e) {

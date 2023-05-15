@@ -108,7 +108,5 @@ public class Hitbox {
 		g.setColor(Color.red);
 		g.drawRect((int) Math.rint(x), (int) Math.rint(y), 
 		(int) Math.rint(width), (int) Math.rint(height));
-		//g.setColor(Color.blue);
-		//g.drawLine(getLeftX(), getBottomY(), getRightX(), getBottomY());
 	}
 }

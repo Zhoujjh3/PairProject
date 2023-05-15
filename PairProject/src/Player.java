@@ -24,44 +24,62 @@ public class Player {
 
 	States state = States.MOVING;
 
-	Image[] playerRunLeftTorso = { new ImageIcon("images//left running frames//l-torso1.png").getImage(),
+	Image[] playerRunLeftTorso = { 
+			new ImageIcon("images//left running frames//l-torso1.png").getImage(),
 			new ImageIcon("images//left running frames//l-torso2.png").getImage(),
 			new ImageIcon("images//left running frames//l-torso3.png").getImage(),
 			new ImageIcon("images//left running frames//l-torso4.png").getImage(),
 			new ImageIcon("images//left running frames//l-torso5.png").getImage(),
-			new ImageIcon("images//left running frames//l-torso6.png").getImage() };
-	Image[] playerRunLeftLegs = { new ImageIcon("images//left running frames//l-legs1.png").getImage(),
+			new ImageIcon("images//left running frames//l-torso6.png").getImage() 
+			};
+	Image[] playerRunLeftLegs = { 
+			new ImageIcon("images//left running frames//l-legs1.png").getImage(),
 			new ImageIcon("images//left running frames//l-legs2.png").getImage(),
 			new ImageIcon("images//left running frames//l-legs3.png").getImage(),
 			new ImageIcon("images//left running frames//l-legs4.png").getImage(),
 			new ImageIcon("images//left running frames//l-legs5.png").getImage(),
-			new ImageIcon("images//left running frames//l-legs6.png").getImage() };
-	Image[] playerRunRightTorso = { new ImageIcon("images//right running frames//r-torso1.png").getImage(),
+			new ImageIcon("images//left running frames//l-legs6.png").getImage() 
+			};
+	Image[] playerRunRightTorso = { 
+			new ImageIcon("images//right running frames//r-torso1.png").getImage(),
 			new ImageIcon("images//right running frames//r-torso2.png").getImage(),
 			new ImageIcon("images//right running frames//r-torso3.png").getImage(),
 			new ImageIcon("images//right running frames//r-torso4.png").getImage(),
 			new ImageIcon("images//right running frames//r-torso5.png").getImage(),
-			new ImageIcon("images//right running frames//r-torso6.png").getImage(), };
-	Image[] playerRunRightLegs = { new ImageIcon("images//right running frames//r-legs1.png").getImage(),
+			new ImageIcon("images//right running frames//r-torso6.png").getImage(),
+			};
+	Image[] playerRunRightLegs = { 
+			new ImageIcon("images//right running frames//r-legs1.png").getImage(),
 			new ImageIcon("images//right running frames//r-legs2.png").getImage(),
 			new ImageIcon("images//right running frames//r-legs3.png").getImage(),
 			new ImageIcon("images//right running frames//r-legs4.png").getImage(),
 			new ImageIcon("images//right running frames//r-legs5.png").getImage(),
-			new ImageIcon("images//right running frames//r-legs6.png").getImage(), };
-	Image[] playerSwingLeft = { new ImageIcon("images//swing//leftswing1.png").getImage(),
+			new ImageIcon("images//right running frames//r-legs6.png").getImage(), 
+			};
+	Image[] playerSwingLeft = { 
+			new ImageIcon("images//swing//leftswing1.png").getImage(),
 			new ImageIcon("images//swing//leftswing2.png").getImage(),
 			new ImageIcon("images//swing//leftswing3.png").getImage(),
-			new ImageIcon("images//swing//leftswing4.png").getImage(), };
-	Image[] playerSwingRight = { new ImageIcon("images//swing//rightswing1.png").getImage(),
+			new ImageIcon("images//swing//leftswing4.png").getImage(),
+			};
+	Image[] playerSwingRight = { 
+			new ImageIcon("images//swing//rightswing1.png").getImage(),
 			new ImageIcon("images//swing//rightswing2.png").getImage(),
 			new ImageIcon("images//swing//rightswing3.png").getImage(),
-			new ImageIcon("images//swing//rightswing4.png").getImage(), };
-	Image[] playerIdleLegs = { new ImageIcon("images//legs right.png").getImage(),
-			new ImageIcon("images//legs left.png").getImage() };
-	Image[] playerIdleTorso = { new ImageIcon("images//torso right.png").getImage(),
-			new ImageIcon("images//torso left.png").getImage() };
-	Image[] playerJump = { new ImageIcon("images//jump//jump legs right.png").getImage(),
-			new ImageIcon("images//jump//jump legs left.png").getImage() };
+			new ImageIcon("images//swing//rightswing4.png").getImage(), 
+			};
+	Image[] playerIdleLegs = { 
+			new ImageIcon("images//legs right.png").getImage(),
+			new ImageIcon("images//legs left.png").getImage() 
+			};
+	Image[] playerIdleTorso = { 
+			new ImageIcon("images//torso right.png").getImage(),
+			new ImageIcon("images//torso left.png").getImage() 
+			};
+	Image[] playerJump = { 
+			new ImageIcon("images//jump//jump legs right.png").getImage(),
+			new ImageIcon("images//jump//jump legs left.png").getImage() 
+			};
 
 	public Player() {
 		// player = new ImageIcon(getClass().getClassLoader().getResource("up
@@ -214,13 +232,7 @@ public class Player {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(playerTorso, (int) Math.rint(x), (int) Math.rint(y), 186, 134, null);
 		g2.drawImage(playerLegs, (int) Math.rint(x), (int) Math.rint(y), 186, 134, null);
-		hitbox.drawHitBox(g2);
-		if (swordHitbox1 != null) {
-			swordHitbox1.drawHitBox(g2);
-		}
-		if (swordHitbox2 != null) {
-			swordHitbox2.drawHitBox(g2);
-		}
+		
 		if (direction == 0) {
 			g2.setColor(Color.RED);
 			g2.fillRect((int) Math.rint(x+55), (int) Math.rint(y+140), 104, 16);

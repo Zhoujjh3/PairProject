@@ -24,7 +24,6 @@ public abstract class Projectile {
 		g2.setColor(theColor);
 		g2.drawImage(image, (int) Math.rint(x), (int) Math.rint(y), 
 		(int) Math.rint(height), (int) Math.rint(width), null);
-		hitbox.drawHitBox(g2);
 	}
 	
 	public void setColor(Color theColor) {

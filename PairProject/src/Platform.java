@@ -33,9 +33,6 @@ public class Platform {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(floatingPlatform, (int) X, (int) relativeY, 150, 45, null);	
 		
-		platformHitBox.drawHitBox(g2);
-//		g2.drawLine((int) getXLeft(), 0, (int) getXLeft(), 1000);
-//		g2.drawLine((int) getXRight(), 0, (int) getXRight(), 1000);
 	}
 	
 	public double getXLeft() {

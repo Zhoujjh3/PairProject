@@ -53,7 +53,6 @@ public abstract class Obstacle {
 	public void drawObstacle(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(obstacle, (int) Math.rint(x), (int) Math.rint(y), 100, 100, null);
-		hitbox.drawHitBox(g2);
 	}
 	
 }
