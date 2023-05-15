@@ -275,6 +275,7 @@ public class Player {
 		direction = 1;
 		floor = 0;
 		hitbox = new Hitbox(x + 40, y + 20, 114, 74);
+		health = 100;
 
 		runCounter = 0;
 		XVelocity = 0;
