@@ -61,7 +61,7 @@ public class RunGame {
 			} else if(state == gameState.TUTORIAL){
 				tutorial = false;
 				if(screenCounter < 6.5)
-					screenCounter += 0.03;
+					screenCounter += 0.012;
 				chamber.repaint();
 				if(screenCounter >= 6.5) {
 					state = gameState.PLAYGAME;
